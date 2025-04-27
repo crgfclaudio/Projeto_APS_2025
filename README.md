@@ -1,2 +1,7 @@
 # Projeto_APS_2025
-Projeto Feito durante a aula de Analise e Projeto de Software
+Projeto  a ser feito para a aula de Analise e Projeto de Software
+Integrantes:
+CLaudio Roberto 
+Felipe Steffano
+Jônatas Henrique
+Socrates Farias
