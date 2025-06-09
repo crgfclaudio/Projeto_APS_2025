@@ -4,4 +4,4 @@ Integrantes:
 CLaudio Roberto, 
 Felipe Steffano,
 Jônatas Henrique,
-Socrates Farias
+Rafael Lima
