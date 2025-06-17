@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     direction LR
 
@@ -39,6 +40,12 @@ classDiagram
         + nome: String
         + curso: String
     }
+
+    Aluno "1" -- "0..*" Estagio : realiza
+    Estagio "1" -- "0..*" RelatorioEstagio : possui
+    Professor "1" -- "0..*" Estagio : orienta
+    Coordenador "1" -- "0..*" Estagio : gerencia
+    Coordenador "1" -- "0..*" RelatorioEstagio : avalia
 
     Aluno "1" -- "0..*" Estagio : realiza
     Estagio "1" -- "0..*" RelatorioEstagio : possui
