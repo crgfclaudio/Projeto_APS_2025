@@ -1,47 +1,96 @@
+
+# Diagrama de Casos de Uso - Sistema ConectaAE
+
+Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE, conforme detalhado no SRS de Requisitos.
+
 ```mermaid
-usecaseDiagram
-actor "Usuário Não Logado" as UNL
-actor "Aluno" as Al
-actor "Professor" as Prof
-actor "Administrador" as Adm
-actor "Coordenador" as Coord
+graph TD
+    %% Atores
+    actor A[Aluno]
+    actor P[Professor]
+    actor ADM[Administrador]
+    actor C[Coordenador]
+    actor UNL[Usuário Não Logado]
 
-UNL --> (Logar)
-UNL --> (Recuperar Senha)
-UNL --> (Solicitar Acesso)
+    %% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
+    subgraph Sistema ConectaAE
+        UC1(Logar)
+        UC2(Registrar Usuário)
+        UC3(Recuperar Senha)
 
-Adm --> (Cadastrar Usuário)
-Adm --> (Cadastrar por Convite)
-Adm --> (Cadastrar por Lote)
-Adm --> (Alterar Dados Privados de Usuário)
-Adm --> (Remover Usuário)
+        subgraph Gestão de TCC
+            UC_TCC_1(Submeter Relatório Parcial TCC)
+            UC_TCC_2(Submeter Relatório Final TCC)
+            UC_TCC_3(Acompanhar e Avaliar TCC)
+            UC_TCC_4(Publicar TCC)
+            UC_TCC_5(Consultar Histórico de Versões TCC)
+        end
 
-Al --> (Submeter Relatório Parcial)
-Al --> (Submeter Relatório Final)
-Al --> (Ver Lista de Atividades Vinculadas)
-Al --> (Solicitar Professor)
-Al --> (Enviar Documentação)
-Al --> (Se Candidatar à Monitoria)
-Al --> (Ver Lista de Monitorias Ofertadas)
-Al --> (Registrar Estágio)
-Al --> (Alterar Senha)
-Al --> (Encerrar Sessão)
-Al --> (Alterar Dados)
-Al --> (Solicitar Documentos)
+        subgraph Gestão de Estágio
+            UC_Estagio_1(Cadastrar Estágio)
+            UC_Estagio_2(Submeter Relatório de Estágio)
+            UC_Estagio_3(Aprovar Relatório de Estágio)
+            UC_Estagio_4(Emitir Declaração de Estágio)
+        end
 
-Prof --> (Aprovar TCC)
-Prof --> (Aprovar Estágio)
-Prof --> (Aprovar Relatórios de Monitoria)
-Prof --> (Emitir Certificados)
+        subgraph Gestão de Monitoria
+            UC_Monitoria_1(Gerenciar Chamadas de Monitoria)
+            UC_Monitoria_2(Candidatar-se à Monitoria)
+            UC_Monitoria_3(Matricular Aluno em Monitoria)
+            UC_Monitoria_4(Consultar FAQ da Monitoria)
+            UC_Monitoria_5(Emitir Certificado de Monitoria)
+        end
 
-Coord --> (Ver Lista de Solicitações)
-Coord --> (Aprovar Solicitação)
-Coord --> (Gerenciar FAQ)
-Coord --> (Visualizar Estatísticas)
-Coord --> (Visualizar Logs de Auditoria)
+        subgraph Funções Gerais
+            UC_FG_1(Gerar Certificados e Declarações)
+            UC_FG_2(Enviar Notificações por Email)
+            UC_FG_3(Visualizar Relatórios Gerenciais)
+            UC_FG_4(Visualizar Logs de Auditoria)
+        end
+    end
 
-Adm --> (Emitir Certificados)
-Adm --> (Gerenciar FAQ)
-Adm --> (Gerenciar Logs)
-Adm --> (Visualizar Estatísticas)
-```
+    %% Relacionamentos
+    UNL -- realiza --> UC1
+    UNL -- realiza --> UC3
+
+    A -- realiza --> UC1
+    A -- realiza --> UC_TCC_1
+    A -- realiza --> UC_TCC_2
+    A -- realiza --> UC_TCC_5
+    A -- realiza --> UC_Estagio_1
+    A -- realiza --> UC_Estagio_2
+    A -- realiza --> UC_Monitoria_2
+    A -- realiza --> UC_Monitoria_4
+
+    P -- realiza --> UC1
+    P -- realiza --> UC_TCC_3
+    P -- realiza --> UC_Estagio_3
+    P -- realiza --> UC_Monitoria_1
+    P -- realiza --> UC_FG_2
+
+    ADM -- realiza --> UC1
+    ADM -- realiza --> UC2
+    ADM -- realiza --> UC_TCC_3
+    ADM -- realiza --> UC_TCC_4
+    ADM -- realiza --> UC_Estagio_3
+    ADM -- realiza --> UC_Estagio_4
+    ADM -- realiza --> UC_Monitoria_1
+    ADM -- realiza --> UC_Monitoria_3
+    ADM -- realiza --> UC_Monitoria_5
+    ADM -- realiza --> UC_FG_1
+    ADM -- realiza --> UC_FG_2
+    ADM -- realiza --> UC_FG_3
+    ADM -- realiza --> UC_FG_4
+
+    C -- realiza --> UC1
+    C -- realiza --> UC_TCC_3
+    C -- realiza --> UC_TCC_4
+    C -- realiza --> UC_Estagio_3
+    C -- realiza --> UC_Estagio_4
+    C -- realiza --> UC_Monitoria_1
+    C -- realiza --> UC_Monitoria_3
+    C -- realiza --> UC_Monitoria_5
+    C -- realiza --> UC_FG_1
+    C -- realiza --> UC_FG_2
+    C -- realiza --> UC_FG_3
+    C -- realiza --> UC_FG_4
