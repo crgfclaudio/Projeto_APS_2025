@@ -1,4 +1,3 @@
-
 # Diagrama de Casos de Uso - Sistema ConectaAE
 
 Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE, conforme detalhado no SRS de Requisitos.
@@ -93,4 +92,5 @@ graph TD
     C -- realiza --> UC_FG_1
     C -- realiza --> UC_FG_2
     C -- realiza --> UC_FG_3
+    C -- realiza --> UC_FG_4
     C -- realiza --> UC_FG_4
