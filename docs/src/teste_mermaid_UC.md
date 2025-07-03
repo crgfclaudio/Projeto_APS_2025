@@ -3,7 +3,7 @@
 Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE, conforme detalhado no SRS de Requisitos.
 
 ```mermaid
-graph TD;
+graph TD
     %% Atores
     actor A[Aluno];
     actor P[Professor];
