@@ -1,13 +1,13 @@
 ```mermaid
-graph LR
-    %% Atores
-    actor A[Aluno]
-    actor P[Professor]
-    actor ADM[Administrador]
-    actor C[Coordenador]
-    actor UNL[Usuário Não Logado]
+graph LR;
+%% Atores
+actor A[Aluno];
+actor P[Professor];
+actor ADM[Administrador];
+actor C[Coordenador];
+actor UNL[Usuário Não Logado];
 
-    %% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
+%% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
     subgraph Sistema ConectaAE
         UC1(Logar)
         UC2(Registrar Usuário)
