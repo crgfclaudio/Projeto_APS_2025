@@ -4,12 +4,12 @@ Este diagrama representa os principais atores e casos de uso do sistema Platafor
 
 ```mermaid
 graph LR
-%%Atores
-    actor A[Aluno]
-    actor P[Professor]
-    actor ADM[Administrador]
-    actor C[Coordenador]
-    actor UNL[Usuário Não Logado]
+    %% Atores
+    actor Aluno
+    actor Professor
+    actor Administrador
+    actor Coordenador
+    actor UsuarioNaoLogado
 
     %% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
     subgraph Sistema ConectaAE
@@ -49,47 +49,47 @@ graph LR
     end
 
     %% Relacionamentos
-    UNL -- realiza --> UC1
-    UNL -- realiza --> UC3
+    UsuarioNaoLogado -- realiza --> UC1
+    UsuarioNaoLogado -- realiza --> UC3
 
-    A -- realiza --> UC1
-    A -- realiza --> UC_TCC_1
-    A -- realiza --> UC_TCC_2
-    A -- realiza --> UC_TCC_5
-    A -- realiza --> UC_Estagio_1
-    A -- realiza --> UC_Estagio_2
-    A -- realiza --> UC_Monitoria_2
-    A -- realiza --> UC_Monitoria_4
+    Aluno -- realiza --> UC1
+    Aluno -- realiza --> UC_TCC_1
+    Aluno -- realiza --> UC_TCC_2
+    Aluno -- realiza --> UC_TCC_5
+    Aluno -- realiza --> UC_Estagio_1
+    Aluno -- realiza --> UC_Estagio_2
+    Aluno -- realiza --> UC_Monitoria_2
+    Aluno -- realiza --> UC_Monitoria_4
 
-    P -- realiza --> UC1
-    P -- realiza --> UC_TCC_3
-    P -- realiza --> UC_Estagio_3
-    P -- realiza --> UC_Monitoria_1
-    P -- realiza --> UC_FG_2
+    Professor -- realiza --> UC1
+    Professor -- realiza --> UC_TCC_3
+    Professor -- realiza --> UC_Estagio_3
+    Professor -- realiza --> UC_Monitoria_1
+    Professor -- realiza --> UC_FG_2
 
-    ADM -- realiza --> UC1
-    ADM -- realiza --> UC2
-    ADM -- realiza --> UC_TCC_3
-    ADM -- realiza --> UC_TCC_4
-    ADM -- realiza --> UC_Estagio_3
-    ADM -- realiza --> UC_Estagio_4
-    ADM -- realiza --> UC_Monitoria_1
-    ADM -- realiza --> UC_Monitoria_3
-    ADM -- realiza --> UC_Monitoria_5
-    ADM -- realiza --> UC_FG_1
-    ADM -- realiza --> UC_FG_2
-    ADM -- realiza --> UC_FG_3
-    ADM -- realiza --> UC_FG_4
+    Administrador -- realiza --> UC1
+    Administrador -- realiza --> UC2
+    Administrador -- realiza --> UC_TCC_3
+    Administrador -- realiza --> UC_TCC_4
+    Administrador -- realiza --> UC_Estagio_3
+    Administrador -- realiza --> UC_Estagio_4
+    Administrador -- realiza --> UC_Monitoria_1
+    Administrador -- realiza --> UC_Monitoria_3
+    Administrador -- realiza --> UC_Monitoria_5
+    Administrador -- realiza --> UC_FG_1
+    Administrador -- realiza --> UC_FG_2
+    Administrador -- realiza --> UC_FG_3
+    Administrador -- realiza --> UC_FG_4
 
-    C -- realiza --> UC1
-    C -- realiza --> UC_TCC_3
-    C -- realiza --> UC_TCC_4
-    C -- realiza --> UC_Estagio_3
-    C -- realiza --> UC_Estagio_4
-    C -- realiza --> UC_Monitoria_1
-    C -- realiza --> UC_Monitoria_3
-    C -- realiza --> UC_Monitoria_5
-    C -- realiza --> UC_FG_1
-    C -- realiza --> UC_FG_2
-    C -- realiza --> UC_FG_3
-    C -- realiza --> UC_FG_4
+    Coordenador -- realiza --> UC1
+    Coordenador -- realiza --> UC_TCC_3
+    Coordenador -- realiza --> UC_TCC_4
+    Coordenador -- realiza --> UC_Estagio_3
+    Coordenador -- realiza --> UC_Estagio_4
+    Coordenador -- realiza --> UC_Monitoria_1
+    Coordenador -- realiza --> UC_Monitoria_3
+    Coordenador -- realiza --> UC_Monitoria_5
+    Coordenador -- realiza --> UC_FG_1
+    Coordenador -- realiza --> UC_FG_2
+    Coordenador -- realiza --> UC_FG_3
+    Coordenador -- realiza --> UC_FG_4
