@@ -1,6 +1,6 @@
 # Diagrama de Casos de Uso - Sistema ConectaAE (Orientação Esquerda-Direita)
 
-Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE, com atores à esquerda e casos de uso à direita, conforme detalhado no SRS de Requisitos.
+Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE.
 
 ```mermaid
 graph LR
