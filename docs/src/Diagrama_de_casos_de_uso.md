@@ -93,4 +93,3 @@ graph TD
     C -- realiza --> UC_FG_2
     C -- realiza --> UC_FG_3
     C -- realiza --> UC_FG_4
-    C -- realiza --> UC_FG_4
