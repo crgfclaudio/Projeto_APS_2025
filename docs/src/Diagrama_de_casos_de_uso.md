@@ -1,10 +1,6 @@
-# Diagrama de Casos de Uso - Sistema ConectaAE (Orientação Esquerda-Direita)
-
-Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE.
-
 ```mermaid
 graph LR
-    %% Atores
+    %% Atores (agora usando a palavra-chave 'actor' para exibir o boneco)
     actor Aluno
     actor Professor
     actor Administrador
@@ -88,6 +84,11 @@ graph LR
     Coordenador -- realiza --> UC_Estagio_4
     Coordenador -- realiza --> UC_Monitoria_1
     Coordenador -- realiza --> UC_Monitoria_3
+    Coordenador -- realiza --> UC_Monitoria_5
+    Coordenador -- realiza --> UC_FG_1
+    Coordenador -- realiza --> UC_FG_2
+    Coordenador -- realiza --> UC_FG_3
+    Coordenador -- realiza --> UC_FG_4
     Coordenador -- realiza --> UC_Monitoria_5
     Coordenador -- realiza --> UC_FG_1
     Coordenador -- realiza --> UC_FG_2
