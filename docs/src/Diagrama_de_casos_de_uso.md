@@ -1,13 +1,17 @@
-```mermaid
-graph LR;
-%% Atores
-actor A[Aluno];
-actor P[Professor];
-actor ADM[Administrador];
-actor C[Coordenador];
-actor UNL[Usuário Não Logado];
+# Diagrama de Casos de Uso - Sistema ConectaAE (Orientação Esquerda-Direita)
 
-%% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
+Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE, com atores à esquerda e casos de uso à direita, conforme detalhado no SRS de Requisitos.
+
+```mermaid
+graph LR
+    %% Atores
+    actor A[Aluno]
+    actor P[Professor]
+    actor ADM[Administrador]
+    actor C[Coordenador]
+    actor UNL[Usuário Não Logado]
+
+    %% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
     subgraph Sistema ConectaAE
         UC1(Logar)
         UC2(Registrar Usuário)
