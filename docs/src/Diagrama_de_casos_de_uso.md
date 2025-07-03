@@ -1,15 +1,12 @@
-# Diagrama de Casos de Uso - Sistema ConectaAE
-
-Este diagrama representa os principais atores e casos de uso do sistema Plataforma Acadêmica Integrada ConectaAE, conforme detalhado no SRS de Requisitos.
 
 ```mermaid
-graph TD
+graph LR
     %% Atores
-    actor A[Aluno];
-    actor P[Professor];
-    actor ADM[Administrador];
-    actor C[Coordenador];
-    actor UNL[Usuário Não Logado];
+    actor A[Aluno]
+    actor P[Professor]
+    actor ADM[Administrador]
+    actor C[Coordenador]
+    actor UNL[Usuário Não Logado]
 
     %% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
     subgraph Sistema ConectaAE
