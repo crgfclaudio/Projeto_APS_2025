@@ -4,7 +4,7 @@ Este diagrama representa os principais atores e casos de uso do sistema Platafor
 
 ```mermaid
 graph TD
-    %% Atores
+    %% Atores;
     actor A[Aluno];
     actor P[Professor];
     actor ADM[Administrador];
