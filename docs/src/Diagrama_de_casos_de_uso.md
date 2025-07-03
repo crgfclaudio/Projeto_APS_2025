@@ -4,11 +4,12 @@ Este diagrama representa os principais atores e casos de uso do sistema Platafor
 
 ```mermaid
 graph LR
-actor A[Aluno]
-actor P[Professor]
-actor ADM[Administrador]
-actor C[Coordenador]
-actor UNL[Usuário Não Logado]
+%%Atores
+    actor A[Aluno]
+    actor P[Professor]
+    actor ADM[Administrador]
+    actor C[Coordenador]
+    actor UNL[Usuário Não Logado]
 
     %% Casos de Uso (baseados nas funcionalidades e requisitos do SRS)
     subgraph Sistema ConectaAE
