@@ -1,15 +1,34 @@
 ### UC.2 - Registrar Usuário
 ```mermaid
 classDiagram
-    class Administrador {
-        +registrarUsuario(dados)
+    class FormCadastro {
+        <<boundary>>
+        +tipo: String
+        +dados: CSV | Formulário
+    }
+
+    class CadastroController {
+        <<control>>
+        +validarDados()
+        +registrarUsuario()
     }
 
     class Usuario {
-        +String nome
-        +String email
-        +String cpf
-        +String perfil
+        <<entity>>
+        +nome: String
+        +cpf: String
+        +email: String
+        +perfil: String
     }
 
-    Administrador --> Usuario : cria
+    class UsuarioCollection {
+        <<entity collection>>
+        +adicionar(Usuario)
+        +verificarDuplicidade()
+    }
+
+    FormCadastro --> CadastroController : envia dados
+    CadastroController --> Usuario : cria instância
+    CadastroController --> UsuarioCollection : salva
+    UsuarioCollection --> CadastroController : valida
+
