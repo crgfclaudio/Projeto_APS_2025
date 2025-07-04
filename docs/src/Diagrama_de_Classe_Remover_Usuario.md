@@ -1,4 +1,5 @@
 ### UC.18 - Remover Usuário(Administrador)
+```mermaid
 classDiagram
     class PainelAdministrador {
         <<boundary>>
