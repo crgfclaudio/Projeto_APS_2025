@@ -1,16 +1,31 @@
 ### UC.1 - Logar
 ```mermaid
 classDiagram
+    class LoginForm {
+        <<boundary>>
+        +cpf: String
+        +senha: String
+    }
+
+    class LoginController {
+        <<control>>
+        +autenticar(cpf, senha)
+    }
+
     class Usuario {
-        +String cpf
-        +String senha
-        +boolean autenticado
+        <<entity>>
+        +cpf: String
+        +senha: String
+        +perfil: String
     }
 
-    class Sistema {
-        +autenticarUsuario(cpf, senha)
+    class UsuarioCollection {
+        <<entity collection>>
+        +usuarios: List<Usuario>
+        +buscarUsuario(cpf)
     }
 
-    Usuario --> Sistema : envia credenciais
-    Sistema --> Usuario : autentica acesso
-
+    LoginForm --> LoginController : envia dados
+    LoginController --> UsuarioCollection : consulta
+    UsuarioCollection --> Usuario : retorna dados
+    LoginController --> LoginForm : autenticação ok/erro
