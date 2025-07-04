@@ -4,15 +4,14 @@ Este documento contém os diagramas de classes de análise para os casos de uso 
 
 ## UC.1 - Logar
 
-```mermaid
+%%{ init : { "theme" : "default" } }%%
 classDiagram
-    direction LR
     class "TelaLogin" as TL <<boundary>>
     class "ControleLogin" as CL <<control>>
     class "Usuario" as U <<entity>>
-    class "RepositorioUsuarios" as RU <<entity collection>>
+    class "RepositorioUsuarios" as RU <<collection of entities>>
 
-    TL -- CL : usa
-    CL -- RU : usa
+    TL -- CL : EUA
+    CL -- RU : eua
     RU -- U : gerencia
     CL ..> U : colabora
