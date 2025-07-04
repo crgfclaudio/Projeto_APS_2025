@@ -1,4 +1,5 @@
 ### UC.20 - Cadastrar por Convite(Administrador)
+```mermaid
 classDiagram
     class PainelAdministrador {
         <<boundary>>
