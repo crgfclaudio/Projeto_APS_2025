@@ -1,4 +1,5 @@
 ### UC.19 - Cadastrar Usuário(Administrador)
+```mermaid
 classDiagram
     class PainelAdministrador {
         <<boundary>>
