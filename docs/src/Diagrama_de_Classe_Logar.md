@@ -1,11 +1,11 @@
 # Diagramas de Classes de Análise (Mermaid)
 
-Este documento contém os diagramas de classes de análise para os casos de uso do Sistema ConectaAE, utilizando a sintaxe Mermaid para visualização direta no GitHub.
+## UC.1 - Logar (Organizado para Requisitos de Análise)
 
-## UC.1 - Logar
-
+```mermaid
 %%{ init : { "theme" : "default" } }%%
 classDiagram
+    direction LR
     class "TelaLogin" as TL <<boundary>>
     class "ControleLogin" as CL <<control>>
     class "Usuario" as U <<entity>>
