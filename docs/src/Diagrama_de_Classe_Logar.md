@@ -1,17 +1,16 @@
-# Diagramas de Classes de Análise (Mermaid)
-
-## UC.1 - Logar (Organizado para Requisitos de Análise)
-
+### UC.1 - Logar
 ```mermaid
-%%{ init : { "theme" : "default" } }%%
 classDiagram
-    direction LR
-    class "TelaLogin" as TL <<boundary>>
-    class "ControleLogin" as CL <<control>>
-    class "Usuario" as U <<entity>>
-    class "RepositorioUsuarios" as RU <<collection of entities>>
+    class Usuario {
+        +String cpf
+        +String senha
+        +boolean autenticado
+    }
 
-    TL -- CL : EUA
-    CL -- RU : eua
-    RU -- U : gerencia
-    CL ..> U : colabora
+    class Sistema {
+        +autenticarUsuario(cpf, senha)
+    }
+
+    Usuario --> Sistema : envia credenciais
+    Sistema --> Usuario : autentica acesso
+
