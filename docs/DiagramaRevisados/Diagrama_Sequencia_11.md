@@ -26,4 +26,13 @@ sequenceDiagram
         EstagioCollection-->>EstagioController: resultado das regras
 
         alt Regras não atendidas
-            EstagioCont
+            EstagioController-->>EstagioForm: mostrarErro("Regras não atendidas")
+        else Regras válidas
+            %% 5. Persistência no banco de dados
+            EstagioController->>EstagioCollection: adicionar(estagio)
+            EstagioCollection->>DB: INSERT INTO estagios (...)
+            DB-->>EstagioCollection: confirmação
+            EstagioCollection-->>EstagioController: estágio salvo
+            EstagioController-->>EstagioForm: mostrarSucesso("Estágio registrado com sucesso")
+        end
+    end
