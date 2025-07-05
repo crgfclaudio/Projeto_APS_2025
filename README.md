@@ -62,24 +62,44 @@ O **ConectaAE** é uma plataforma web voltada para a gestão de atividades acad�
 ## 5. Diagrama de Componentes
 
 ```mermaid
-graph TD
-  subgraph Frontend
-    A1[Interface Web (React)]
+graph TB
+  %% Camada de Apresentação
+  subgraph Apresentação
+    WebUI[Web App]
   end
 
-  subgraph Backend
-    B1[API REST (Express.js)]
-    B2[Controladores MVC]
-    B3[Serviços (Negócio)]
-    B4[Gerenciador de Sessões]
+  %% Camada de Negócio (Microserviços)
+  subgraph Negócio
+    APIGateway[API Gateway]
+    AuthService[Auth Service]
+    ProductService[Product Service]
+    OrderService[Order Service]
   end
 
-  subgraph Database
-    C1[(PostgreSQL)]
+  %% Camada de Persistência
+  subgraph Dados
+    UserDB[(User DB)]
+    ProductDB[(Product DB)]
+    OrderDB[(Order DB)]
+    MessageBroker[(RabbitMQ)]
   end
 
-  A1 --> B1
-  B1 --> B2
-  B2 --> B3
-  B3 --> C1
-  B1 --> B4
+  %% Fluxos principais
+  WebUI -->|HTTPS| APIGateway
+
+  APIGateway --> AuthService
+  APIGateway --> ProductService
+  APIGateway --> OrderService
+
+  AuthService -->|CRUD| UserDB
+  ProductService -->|CRUD| ProductDB
+  OrderService -->|CRUD| OrderDB
+
+  %% Comunicação assíncrona (e-mail, notificações, etc.)
+  OrderService -->|pub/sub| MessageBroker
+  MessageBroker -->|notify| EmailWorker[Email Worker]
+
+  %% Serviços Auxiliares
+  subgraph "Serviços Auxiliares"
+    EmailWorker
+  end
