@@ -1,4 +1,4 @@
-### UC.22 - Alterar Dados Privados de Usuário (Administrador)
+### UC.22 - Alterar Dados Privados de Usuário (Administrador) com Arquitetura
 ```mermaid
 sequenceDiagram
     actor Administrador
