@@ -1,19 +1,26 @@
 ```mermaid
 sequenceDiagram
-  participant Boundary as LoginUI (Boundary)
-  participant Control as AuthController (Control)
-  participant Entity as User (Entity)
-  participant EntityCollection as Sessions (EntityCollection)
+    actor Cliente
 
-  Boundary->>Control: login(credentials)
-  Control->>Entity: findUser(credentials.username)
-  Entity-->>Control: user
-  Control->>Entity: verifyPassword(credentials.password)
-  Entity-->>Control: validPassword?
-  alt validPassword
-    Control->>EntityCollection: createSession(user)
-    EntityCollection-->>Control: session
-    Control-->>Boundary: showDashboard(session)
-  else invalidPassword
-    Control-->>Boundary: showError("Credenciais inválidas")
-  end
+    participant LoginUI              as LoginUI (Boundary)
+    participant AuthController       as AuthController (Control)
+    participant User                 as User (Entity)
+    participant Sessions             as Sessions (EntityCollection)
+
+    Cliente->>LoginUI: login(credentials)
+    LoginUI->>AuthController: login(credentials)
+
+    AuthController->>User: findUser(credentials.username)
+    User-->>AuthController: usuárioEncontrado
+
+    AuthController->>User: verifyPassword(credentials.password)
+    User-->>AuthController: senhaVálida?
+
+    alt senhaVálida
+        AuthController->>Sessions: createSession(usuário)
+        Sessions-->>AuthController: sessãoCriada
+        AuthController-->>LoginUI: mostrarDashboard(sessãoCriada)
+    else senhaInválida
+        AuthController-->>LoginUI: mostrarErro("Credenciais inválidas")
+    end
+
