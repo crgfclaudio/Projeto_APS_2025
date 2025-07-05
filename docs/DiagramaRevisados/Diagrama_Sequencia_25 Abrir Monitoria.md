@@ -1,4 +1,6 @@
-'''mermaid
+### UC.25 - Abrir Monitoria (Professor)
+
+```mermaid
 sequenceDiagram
     actor Professor
     participant PainelProfessor as UI: PainelProfessor (React)
