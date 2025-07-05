@@ -1,0 +1,61 @@
+# Caso de Uso: UC.7 - Solicitar Professor
+
+## Descrição
+Permite ao aluno indicar o professor que será seu orientador no processo de TCC.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- Aluno logado  
+- Processo de TCC iniciado
+
+---
+
+## Fluxo Principal
+1. Acessar seção de submissão de TCC.  
+2. Selecionar opção **Indicar Professor Orientador**.  
+3. Escolher professor da lista de orientadores disponíveis do curso.  
+4. Confirmar indicação.  
+5. Sistema salva o vínculo e notifica o professor.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Professor já atingiu número máximo de orientandos
+1. O ator clica na opção **Confirmar Indicação**.  
+2. O sistema impede a seleção.  
+3. O sistema exibe a mensagem:  
+   *"Quantidade máxima de orientandos atingida, falar com o professor ou escolher outro como orientador."*
+
+---
+
+## Exceções
+- Lista de professores indisponível.  
+- Erro no vínculo.
+
+---
+
+## Pós-condições
+- Professor indicado como orientador do TCC.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF008  
+- RN003.1
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
