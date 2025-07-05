@@ -1,3 +1,4 @@
+### UC.11 - Registrar Estágio
 ```mermaid
 sequenceDiagram
     actor Aluno
