@@ -1,0 +1,28 @@
+# Caso de Uso: UC.24 - Aceitar Solicitação de Estágio
+
+## Descrição
+Este caso de uso descreve o processo realizado pelo coordenador para aceitar formalmente uma solicitação de estágio enviada por um aluno, após análise da documentação e conformidade com as regras institucionais.
+
+---
+
+## Ator Principal
+- Coordenador
+
+---
+
+## Pré-condição
+- O coordenador deve estar autenticado no sistema.
+- Deve haver acesso às solicitações pendentes.
+
+---
+
+## Fluxo Principal
+1. O ator acessa a lista de solicitações de estágio (ver UC.23).  
+2. O ator seleciona uma solicitação com status **“Pendente”**.  
+3. O sistema exibe os detalhes da solicitação.  
+4. O ator clica na opção **“Aceitar Solicitação”**.  
+5. O sistema solicita confirmação da ação.  
+6. O ator confirma a aceitação.  
+7. O sistema atualiza o status da solicitação para **“Aceita”**.  
+8. O sistema notifica o aluno da decisão.  
+9. O caso de uso se encerr
