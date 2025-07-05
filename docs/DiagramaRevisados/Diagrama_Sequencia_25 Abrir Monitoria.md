@@ -1,4 +1,4 @@
-### UC.25 - Abrir Monitoria (Professor)
+### UC.25 - Abrir Monitoria (Professor) com Arquitetura
 
 ```mermaid
 
