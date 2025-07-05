@@ -29,4 +29,6 @@ sequenceDiagram
         UsuarioCollection->>DB: UPDATE usuarios SET cpf=..., email=..., matricula=... WHERE id = ?
         DB-->>UsuarioCollection: OK
         UsuarioCollection-->>EdicaoPrivadaController: confirmação
-        EdicaoPrivadaController-->>PainelAdministrador: exibirSucesso("Dad
+        EdicaoPrivadaController-->>PainelAdministrador: exibirSucesso("Dados atualizados com sucesso")
+    end
+
