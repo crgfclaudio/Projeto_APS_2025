@@ -1,0 +1,69 @@
+# Caso de Uso: UC.28 - Ver Lista de Acompanhamentos
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo professor para visualizar a lista de acompanhamentos ativos em que ele está vinculado como responsável, incluindo acompanhamentos de estágio, monitoria e TCC.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **“Acompanhamentos”**.
+2. O sistema exibe uma lista com todos os acompanhamentos ativos vinculados ao professor, incluindo:
+   - Estágios que o professor acompanha
+   - Monitorias abertas por ele com alunos selecionados
+   - TCCs sob sua orientação
+3. A lista apresenta informações resumidas como:
+   - Nome do aluno
+   - Tipo de acompanhamento (estágio, monitoria, TCC)
+   - Data de início
+   - Status (em andamento, concluído, interrompido)
+4. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Aplicar filtros
+1. O ator filtra a lista por tipo de acompanhamento, curso, status ou aluno.
+2. O sistema atualiza a exibição conforme os critérios selecionados.
+
+### FA.2 – Ordenar acompanhamentos
+1. O ator ordena a lista por nome do aluno, data de início ou status.
+2. O sistema apresenta a lista conforme o critério escolhido.
+
+---
+
+## Exceções
+- Se não houver acompanhamentos vinculados, o sistema exibe a mensagem:  
+  **“Nenhum acompanhamento encontrado.”**
+- Em caso de falha na recuperação dos dados, o sistema exibe mensagem de erro e orienta nova tentativa.
+
+---
+
+## Pós-condições
+- O professor tem uma visão geral de todos os acompanhamentos sob sua responsabilidade.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF016  
+- RF019
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
