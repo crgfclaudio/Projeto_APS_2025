@@ -1,23 +1,33 @@
-### UC.06 - Ver Lista de Atividades Vinculadas (Aluno)
+### UC.06 - Ver Lista de Atividades Vinculadas (Aluno) com Arquitetura
 
 ```mermaid
 sequenceDiagram
     actor Aluno
-    participant PainelAluno as PainelAluno (Boundary)
-    participant AtividadeController as AtividadeController (Control)
-    participant AtividadeCollection as AtividadeCollection (EntityCollection)
-    participant DB as PostgreSQL
 
-    %% 1. Ação do aluno
-    Aluno->>PainelAluno: visualizarAtividades()
-    PainelAluno->>AtividadeController: GET /atividades?aluno_id=id
+    participant WebApp as WebApp (Apresentação)
+    participant AlunoService as AlunoService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Relatorio as Módulo Relatório
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
-    %% 2. Consulta no backend
-    AtividadeController->>AtividadeCollection: buscarPorAluno(idAluno)
-    AtividadeCollection->>DB: SELECT * FROM atividades WHERE aluno_id = ?
+    %% 1. Requisição do aluno pela interface
+    Aluno->>WebApp: visualizarMinhasAtividades()
+    WebApp->>AlunoService: GET /atividades?aluno_id=123
 
-    %% 3. Retorno e exibição
-    DB-->>AtividadeCollection: lista de atividades
-    AtividadeCollection-->>AtividadeController: atividades do aluno
-    AtividadeController-->>PainelAluno: retornar lista
-    PainelAluno-->>Aluno: exibir atividades com status
+    %% 2. Direcionamento da requisição
+    AlunoService->>Modulos: solicitarAtividadesAluno(idAluno)
+    Modulos->>Relatorio: buscarAtividadesVinculadas(idAluno)
+
+    %% 3. Consulta ao banco de dados
+    Relatorio->>DB: consultarAtividadesPorAluno(idAluno)
+    DB->>DocDB: SELECT * FROM atividades WHERE aluno_id = 123
+    DocDB-->>DB: listaAtividades
+    DB-->>Relatorio: retornoAtividades
+
+    %% 4. Resposta final
+    Relatorio-->>Modulos: atividadesEncontradas
+    Modulos-->>AlunoService: atividades do aluno
+    AlunoService-->>WebApp: exibirLista(atividades)
+    WebApp-->>Aluno: mostrarAtividadesComStatus
+
