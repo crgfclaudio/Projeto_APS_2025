@@ -1,6 +1,5 @@
 ### UC.16 - Aprovar Solicitação (Professor)
 ```mermaid
-
 sequenceDiagram
     actor Professor
     participant PainelProfessor as PainelProfessor (Boundary)
