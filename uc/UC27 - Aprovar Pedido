@@ -1,0 +1,23 @@
+# Caso de Uso: UC.27 - Aprovar Pedido
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo professor para aprovar uma solicitação recebida no sistema, seja uma candidatura à monitoria, um pedido de orientação de TCC ou acompanhamento de estágio.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa a lista de solicitações (ver UC.26).
+2. O ator seleciona uma solicitação com status **“Pendente”**.
+3. O sistema exibe os detalhes completos da solicitação.
+4. O ator clica na opção **“Aprovar Solicitação”**.
+5. O sistema solicita confir
