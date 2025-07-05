@@ -1,37 +1,50 @@
-### UC.16 - Aprovar Solicitação (Professor)
+### UC.16 - Aprovar Solicitação (Professor) com Arquitetura
 ```mermaid
 sequenceDiagram
     actor Professor
-    participant PainelProfessor as PainelProfessor (Boundary)
-    participant SolicitacaoController as SolicitacaoController (Control)
-    participant SolicitacaoCollection as SolicitacaoCollection (EntityCollection)
-    participant Solicitacao as Solicitacao (Entity)
-    participant DB as PostgreSQL
+
+    participant WebApp as WebApp (Apresentação)
+    participant ProfessorService as ProfessorService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Estagio as Módulo Estágio
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
     %% Visualização inicial da solicitação
-    Professor->>PainelProfessor: visualizarSolicitacao(id)
-    PainelProfessor->>SolicitacaoController: visualizarSolicitacao(id)
-    SolicitacaoController->>SolicitacaoCollection: buscarPorId(id)
-    SolicitacaoCollection->>DB: SELECT * FROM solicitacoes WHERE id = ?
-    DB-->>SolicitacaoCollection: dados da solicitação
-    SolicitacaoCollection-->>SolicitacaoController: solicitacao
-    SolicitacaoController-->>PainelProfessor: exibirDetalhes(solicitacao)
+    Professor->>WebApp: visualizarSolicitacao(id)
+    WebApp->>ProfessorService: GET /solicitacoes/{id}
+    ProfessorService->>Modulos: buscarSolicitacao(id)
+    Modulos->>Estagio: obterDetalhesSolicitacao(id)
+    Estagio->>DB: consultarSolicitacao(id)
+    DB->>DocDB: SELECT * FROM solicitacoes WHERE id = ?
+    DocDB-->>DB: dados da solicitação
+    DB-->>Estagio: dados recebidos
+    Estagio-->>Modulos: detalhes da solicitação
+    Modulos-->>ProfessorService: retorno com dados
+    ProfessorService-->>WebApp: exibirDetalhes(solicitacao)
+    WebApp-->>Professor: detalhes da solicitação
 
-    %% Fluxo principal – Decisão
+    %% Decisão do professor
     alt Aprovar
-        Professor->>PainelProfessor: aprovar(id)
-        PainelProfessor->>SolicitacaoController: aprovarSolicitacao(id)
-        SolicitacaoController->>SolicitacaoCollection: atualizarStatus(id, "Aprovada")
-        SolicitacaoCollection->>DB: UPDATE solicitacoes SET status = 'Aprovada' WHERE id = ?
-        DB-->>SolicitacaoCollection: OK
-        SolicitacaoCollection-->>SolicitacaoController: confirmação
-        SolicitacaoController-->>PainelProfessor: mostrarConfirmacao("Solicitação aprovada")
+        Professor->>WebApp: aprovarSolicitacao(id)
+        WebApp->>ProfessorService: POST /solicitacoes/{id}/aprovar
+        ProfessorService->>Modulos: aprovarSolicitacao(id)
+        Modulos->>Estagio: atualizarStatus(id, "Aprovada")
+        Estagio->>DB: UPDATE solicitacoes SET status = 'Aprovada' WHERE id = ?
+        DB-->>Estagio: OK
+        Estagio-->>Modulos: confirmação
+        Modulos-->>ProfessorService: status atualizado
+        ProfessorService-->>WebApp: mostrarConfirmacao("Solicitação aprovada")
+        WebApp-->>Professor: feedback de aprovação
     else Rejeitar
-        Professor->>PainelProfessor: rejeitar(id)
-        PainelProfessor->>SolicitacaoController: rejeitarSolicitacao(id)
-        SolicitacaoController->>SolicitacaoCollection: atualizarStatus(id, "Rejeitada")
-        SolicitacaoCollection->>DB: UPDATE solicitacoes SET status = 'Rejeitada' WHERE id = ?
-        DB-->>SolicitacaoCollection: OK
-        SolicitacaoCollection-->>SolicitacaoController: confirmação
-        SolicitacaoController-->>PainelProfessor: mostrarConfirmacao("Solicitação rejeitada")
+        Professor->>WebApp: rejeitarSolicitacao(id)
+        WebApp->>ProfessorService: POST /solicitacoes/{id}/rejeitar
+        ProfessorService->>Modulos: rejeitarSolicitacao(id)
+        Modulos->>Estagio: atualizarStatus(id, "Rejeitada")
+        Estagio->>DB: UPDATE solicitacoes SET status = 'Rejeitada' WHERE id = ?
+        DB-->>Estagio: OK
+        Estagio-->>Modulos: confirmação
+        Modulos-->>ProfessorService: status atualizado
+        ProfessorService-->>WebApp: mostrarConfirmacao("Solicitação rejeitada")
+        WebApp-->>Professor: feedback de rejeição
     end
