@@ -1,4 +1,4 @@
-### UC.10 - Ver Lista de Monitorias Ofertadas com arquitetura
+### UC.10 - Ver Lista de Monitorias Ofertadas com Arquitetura
 ```mermaid
 sequenceDiagram
     actor Aluno
