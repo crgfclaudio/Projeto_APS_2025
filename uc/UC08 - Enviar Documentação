@@ -1,0 +1,54 @@
+# Caso de Uso: UC.8 - Enviar Documentação
+
+## Descrição
+Permite ao aluno anexar arquivos obrigatórios para validação de atividades como estágio ou monitoria.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- Atividade cadastrada  
+- Participação ativa na atividade
+
+---
+
+## Fluxo Principal
+1. O sistema identifica o tipo de atividade e quais são os documentos obrigatórios.  
+2. Selecionar em **Enviar Documentação**.  
+3. Anexar arquivos exigidos.  
+4. Confirmar envio.
+
+---
+
+## Fluxos Alternativos (FA)
+- N/A
+
+---
+
+## Exceções
+- Arquivo inválido ou incompleto.
+
+---
+
+## Pós-condições
+- Documentação salva e disponível para análise.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF013  
+- RF014
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
