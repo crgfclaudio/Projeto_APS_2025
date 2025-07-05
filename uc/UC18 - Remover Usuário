@@ -1,0 +1,26 @@
+# Caso de Uso: UC.18 - Remover Usuário
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo administrador do sistema para remover um usuário da base de dados, desativando seu acesso ao sistema e excluindo ou desassociando seus registros conforme as permissões.
+
+---
+
+## Ator Principal
+- Administrador
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Gerenciar Usuários**.  
+2. O sistema exibe a lista de usuários registrados no sistema.  
+3. O ator seleciona o usuário que deseja remover.  
+4. O sistema exibe os dados do usuário e uma opção para confirmação da remoção.  
+5. O ator confirma a remoção.  
+6. O sistema verifica se o usuário pode ser removido (se não há vínculos obrigatórios pendentes).  
+7. O sistema remove o usuário da base de dados.  
+8. O sistema exibe uma m
