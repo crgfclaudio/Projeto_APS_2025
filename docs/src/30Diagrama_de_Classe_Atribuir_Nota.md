@@ -1,6 +1,5 @@
 ### UC.30 - Atribuir Nota
 
-
 ```mermaid
 %% Diagrama de Classe para UC.30 – Atribuir Nota
 classDiagram
@@ -56,7 +55,6 @@ classDiagram
     AvaliacaoController --> AvaliacaoCollection : adicionar(avaliacao)
     AvaliacaoController --> PainelProfessor : mostrarConfirmacao()
 
-        +buscar()
         +atualizarStatus()
     }
 
