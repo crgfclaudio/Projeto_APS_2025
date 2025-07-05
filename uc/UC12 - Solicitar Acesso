@@ -1,0 +1,55 @@
+# Caso de Uso: UC.12 - Solicitar Acesso
+
+## Descrição
+Permite que uma senha seja criada para acessar o sistema pela primeira vez ou em caso de desbloqueio de acesso.
+
+---
+
+## Ator Principal
+- Usuário não logado
+
+---
+
+## Pré-condição
+- Cadastro existente no sistema
+
+---
+
+## Fluxo Principal
+1. O usuário preenche o seu número de CPF no campo CPF.  
+2. O usuário clica em **Solicitar Acesso**.  
+3. O sistema redireciona o usuário para uma nova página para cadastrar uma nova senha.  
+4. O usuário preenche o campo de senha com uma nova senha.  
+5. O sistema atualiza a senha digitada e volta para a tela de login.  
+6. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+- N/A
+
+---
+
+## Exceções
+- Numeração inválida digitada.  
+- Campos obrigatórios não preenchidos.
+
+---
+
+## Pós-condições
+- O usuário atualiza a senha de acesso ao portal.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF003
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
