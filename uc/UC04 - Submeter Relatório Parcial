@@ -1,0 +1,59 @@
+# Caso de Uso: UC.4 - Submeter Relatório Parcial
+
+## Descrição
+Permite ao aluno enviar um relatório parcial relacionado a uma atividade vinculada (como estágio ou monitoria).
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- Atividade vinculada ativa  
+- Aluno logado
+
+---
+
+## Fluxo Principal
+1. Acessar seção **Minhas Atividades**.  
+2. Escolher a atividade vinculada.  
+3. Clicar em **Enviar Relatório Parcial**.  
+4. Anexar documento PDF.  
+5. Confirmar envio.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Acessar atividade já finalizada
+1. O sistema impede o envio.  
+2. Exibe uma mensagem informando que apenas atividades em andamento aceitam relatórios parciais.
+
+---
+
+## Exceções
+- Documento inválido.  
+- Falha no envio.
+
+---
+
+## Pós-condições
+- Relatório parcial submetido.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF014  
+- RN004.2
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
