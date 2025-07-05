@@ -1,0 +1,52 @@
+# Caso de Uso: UC.3 - Recuperar Senha
+
+## Descrição
+Permite recuperar o acesso à conta por meio do e-mail institucional ou solicitando ao Administrador ou Administrador Auxiliar.
+
+---
+
+## Ator Principal
+- Usuário Não Logado
+
+---
+
+## Pré-condição
+- Conta existente
+
+---
+
+## Fluxo Principal
+1. Clicar em **Esqueci minha senha**.  
+2. Informar e-mail institucional.  
+3. Sistema envia link temporário de redefinição.  
+4. Usuário define nova senha.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Recuperação via administrador
+1. Usuário não possui acesso ao e-mail institucional.  
+2. Clica em **Solicitar recuperação manual**.  
+3. Sistema abre formulário de solicitação.  
+4. Administrador ou Auxiliar valida a solicitação e redefine a senha.  
+5. Usuário recebe nova senha provisória.
+
+---
+
+## Exceções
+- E-mail inválido ou não registrado.  
+- Falha no envio do link.  
+- Solicitação negada por dados inconsistentes.
+
+---
+
+## Pós-condições
+- Nova senha registrada com sucesso.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
