@@ -1,6 +1,7 @@
 ### UC.26 - Ver Lista de Solicitações
 
 ```mermaid
+%% Diagrama de Classe para UC.26 – Ver Lista de Solicitações Recebidas
 classDiagram
     class PainelProfessor {
         <<boundary>>
@@ -27,7 +28,6 @@ classDiagram
 
     class SolicitacaoCollection {
         <<entity collection>>
-        +solicitacoes: List<Solicitacao>
         +buscarTodas()
         +filtrar(params)
         +ordenar(criterio)
@@ -35,6 +35,5 @@ classDiagram
 
     PainelProfessor --> SolicitacoesController : requisitarLista()
     SolicitacoesController --> SolicitacaoCollection : buscarTodas()
-    SolicitacaoCollection --> Solicitacao : retornaDados
-    SolicitacoesController -->> PainelProfessor : entregarLista(List<Solicitacao>)
-
+    SolicitacaoCollection --> Solicitacao : retornaDados()
+    SolicitacoesController --> PainelProfessor : entregarLista(List<Solicitacao>)
