@@ -1,34 +1,47 @@
-### UC.5 - Submeter Relatório Final
+### UC.5 - Submeter Relatório Final com arquitetura
 ```mermaid
 sequenceDiagram
     actor Aluno
-    participant EnvioRelatorioFinalForm as EnvioRelatorioFinalForm (Boundary)
-    participant SubmissaoFinalController as SubmissaoFinalController (Control)
-    participant RelatorioCollection as RelatorioCollection (EntityCollection)
-    participant DB as PostgreSQL
 
-    %% 1. Envio do formulário
-    Aluno->>EnvioRelatorioFinalForm: anexarArquivo(PDF)
-    EnvioRelatorioFinalForm->>SubmissaoFinalController: POST /relatorioFinal (dados, arquivo)
+    participant WebApp as WebApp (Apresentação)
+    participant AlunoService as AlunoService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Relatorio as Módulo Relatório
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
-    %% 2. Verificação de submissão existente
-    SubmissaoFinalController->>RelatorioCollection: verificarSubmissaoFinal(idAluno)
-    RelatorioCollection->>DB: SELECT * FROM relatorios WHERE aluno_id = ? AND tipo = 'final'
+    %% 1. Submissão via WebApp
+    Aluno->>WebApp: enviarRelatorioFinal(PDF, metadados)
+    WebApp->>AlunoService: POST /relatorio/final (dados, arquivo)
+
+    %% 2. Direcionamento do fluxo
+    AlunoService->>Modulos: encaminharParaModulo("relatorioFinal")
+    Modulos->>Relatorio: processarSubmissaoFinal(idAluno, dados, arquivo)
+
+    %% 3. Verificação de submissão duplicada
+    Relatorio->>DB: verificarSubmissaoFinal(idAluno)
+    DB->>DocDB: SELECT * FROM relatorios WHERE aluno_id = ? AND tipo = 'final'
 
     alt Submissão já realizada
-        DB-->>RelatorioCollection: relatório existente
-        RelatorioCollection-->>SubmissaoFinalController: duplicado
-        SubmissaoFinalController-->>EnvioRelatorioFinalForm: erro("Submissão já realizada")
-        EnvioRelatorioFinalForm-->>Aluno: exibir erro
+        DocDB-->>DB: relatório existente
+        DB-->>Relatorio: duplicado
+        Relatorio-->>Modulos: erro("Relatório final já submetido")
+        Modulos-->>AlunoService: erro duplicidade
+        AlunoService-->>WebApp: exibirErro("Submissão já realizada")
+        WebApp-->>Aluno: mostrarErro
     else Submissão permitida
-        DB-->>RelatorioCollection: nenhum encontrado
-        RelatorioCollection-->>SubmissaoFinalController: permitido
+        DocDB-->>DB: nenhum encontrado
+        DB-->>Relatorio: ok
 
-        %% 3. Criação e inserção do relatório
-        SubmissaoFinalController->>RelatorioCollection: adicionarRelatorioFinal(idAluno, dados, arquivo)
-        RelatorioCollection->>DB: INSERT INTO relatorios (...)
-        DB-->>RelatorioCollection: OK
-        RelatorioCollection-->>SubmissaoFinalController: confirmação
-        SubmissaoFinalController-->>EnvioRelatorioFinalForm: sucesso("Relatório submetido")
-        EnvioRelatorioFinalForm-->>Aluno: exibir confirmação
+        %% 4. Inserção no banco
+        Relatorio->>DB: salvarRelatorioFinal(idAluno, dados, arquivo)
+        DB->>DocDB: INSERT INTO relatorios (tipo='final', ...)
+        DocDB-->>DB: OK
+        DB-->>Relatorio: confirmação
+
+        %% 5. Confirmação
+        Relatorio-->>Modulos: sucesso
+        Modulos-->>AlunoService: relatório final salvo
+        AlunoService-->>WebApp: exibirSucesso("Relatório final submetido com sucesso")
+        WebApp-->>Aluno: mostrarConfirmação
     end
