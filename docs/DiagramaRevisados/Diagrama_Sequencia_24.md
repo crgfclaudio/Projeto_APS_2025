@@ -1,4 +1,4 @@
-### UC.24 - Aceitar Solicitação de Estágio (Professor)
+### UC.24 - Aceitar Solicitação de Estágio (Professor) com Arquitetura
 
 ````mermaid
 sequenceDiagram
