@@ -25,8 +25,4 @@ sequenceDiagram
 
     Relatorio-->>WebApp: status = "submissão recebida"
 
-            CandidaturaCollection-->>MonitoriaController: confirmação
-            MonitoriaController-->>CandidaturaForm: mostrarSuccess("Candidatura registrada com sucesso")
-        end
-    end
 
