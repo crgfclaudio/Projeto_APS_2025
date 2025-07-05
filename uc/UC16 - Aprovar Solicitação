@@ -1,0 +1,32 @@
+# Caso de Uso: UC.16 - Aprovar Solicitação
+
+## Descrição
+Este caso de uso descreve o processo para que o coordenador aprove uma solicitação registrada por um aluno no sistema.
+
+---
+
+## Ator Principal
+- Coordenador
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa a lista de solicitações.  
+2. O ator seleciona a solicitação que deseja aprovar.  
+3. O sistema exibe os detalhes da solicitação.  
+4. O ator clica na opção **Aprovar Solicitação**.  
+5. O sistema registra a aprovação da solicitação.  
+6. O sistema notifica o aluno sobre a aprovação.  
+7. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Rejeitar solicitação
+1. O ator opta p
