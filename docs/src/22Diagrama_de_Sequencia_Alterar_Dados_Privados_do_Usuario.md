@@ -1,29 +1,32 @@
 ### UC.22 - Alterar Dados Privados de Usuário (Administrador)
 ```mermaid
 sequenceDiagram
-    actor Aluno
+    actor Administrador
+    participant PainelAdministrador as UI: PainelAdministrador (React)
+    participant EdicaoPrivadaController as Controller: EdicaoPrivadaController (Express/Django)
+    participant UsuarioCollection as Repository: UsuarioCollection
+    participant Usuario as Entity: Usuario
+    participant DB as PostgreSQL
 
-    participant CandidaturaForm        as CandidaturaForm (Boundary)
-    participant MonitoriaController    as MonitoriaController (Control)
-    participant CandidaturaCollection  as CandidaturaCollection (EntityCollection)
-    participant Candidatura            as Candidatura (Entity)
+    %% Acesso ao usuário
+    Administrador->>PainelAdministrador: buscar usuário por ID
+    PainelAdministrador->>EdicaoPrivadaController: GET /usuario/:id
+    EdicaoPrivadaController->>UsuarioCollection: buscarPorId(id)
+    UsuarioCollection->>DB: SELECT * FROM usuarios WHERE id = ?
+    DB-->>UsuarioCollection: dados do usuário
+    UsuarioCollection-->>EdicaoPrivadaController: retornar usuário
+    EdicaoPrivadaController-->>PainelAdministrador: preencherForm(dados)
 
-    Aluno->>CandidaturaForm: preencherDados()
-    CandidaturaForm->>CandidaturaForm: anexarDocs(files)
-    CandidaturaForm->>MonitoriaController: registrarCandidatura(dados, files)
+    %% Alteração dos dados
+    Administrador->>PainelAdministrador: editarDadosSensiveis()
+    PainelAdministrador->>EdicaoPrivadaController: PUT /usuario/:id (novos dados)
+    EdicaoPrivadaController->>EdicaoPrivadaController: validarCampos(dados)
 
-    MonitoriaController->>MonitoriaController: validarRequisitos(dados)
-    alt requisitos não atendidos
-        MonitoriaController-->>CandidaturaForm: mostrarErro("Requisitos não atendidos")
-    else requisitos atendidos
-        MonitoriaController->>CandidaturaCollection: verificarDuplicidade(idAluno, idMonitoria)
-        CandidaturaCollection-->>MonitoriaController: duplicado?
-        alt duplicada
-            MonitoriaController-->>CandidaturaForm: mostrarErro("Candidatura já existe")
-        else não duplicada
-            MonitoriaController->>Candidatura: new Candidatura(dados, files)
-            MonitoriaController->>CandidaturaCollection: adicionar(candidatura)
-            CandidaturaCollection-->>MonitoriaController: confirmação
-            MonitoriaController-->>CandidaturaForm: mostrarSuccess("Candidatura enviada")
-        end
-    end
+    alt Dados inválidos
+        EdicaoPrivadaController-->>PainelAdministrador: exibirErro("Campos inválidos")
+    else Dados válidos
+        EdicaoPrivadaController->>UsuarioCollection: atualizarUsuario(id, novosDados)
+        UsuarioCollection->>DB: UPDATE usuarios SET cpf=..., email=..., matricula=... WHERE id = ?
+        DB-->>UsuarioCollection: OK
+        UsuarioCollection-->>EdicaoPrivadaController: confirmação
+        EdicaoPrivadaController-->>PainelAdministrador: exibirSucesso("Dad
