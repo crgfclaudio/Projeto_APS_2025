@@ -1,35 +1,48 @@
-### UC.07 - Solicitar Professor (Aluno)
+### UC.07 - Solicitar Professor (Aluno) com Arquitetura
 
 ```mermaid
 sequenceDiagram
     actor Aluno
-    participant IndicacaoProfessorForm as IndicacaoProfessorForm (Boundary)
-    participant TCCController as TCCController (Control)
-    participant ProfessorCollection as ProfessorCollection (EntityCollection)
-    participant DB as PostgreSQL
-    participant TCC as TCC (Entity)
 
-    %% 1. Seleção de professor
-    Aluno->>IndicacaoProfessorForm: selecionarProfessor(professorId)
-    IndicacaoProfessorForm->>TCCController: POST /tcc/vincularProfessor(idAluno, professorId)
+    participant WebApp as WebApp (Apresentação)
+    participant AlunoService as AlunoService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant TCCModulo as Módulo TCC
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
-    %% 2. Validação da disponibilidade do professor
-    TCCController->>ProfessorCollection: validarDisponibilidade(professorId)
-    ProfessorCollection->>DB: SELECT COUNT(*) FROM tcc WHERE professor_id = ?
+    %% 1. Envio da solicitação via WebApp
+    Aluno->>WebApp: selecionarProfessor(professorId)
+    WebApp->>AlunoService: POST /tcc/vincularProfessor(idAluno, professorId)
+
+    %% 2. Encaminhamento ao módulo TCC
+    AlunoService->>Modulos: requisitarVinculoProfessor(idAluno, professorId)
+    Modulos->>TCCModulo: vincularProfessorTCC(idAluno, professorId)
+
+    %% 3. Verificação da disponibilidade do professor
+    TCCModulo->>DB: contarOrientandos(professorId)
+    DB->>DocDB: SELECT COUNT(*) FROM tcc WHERE professor_id = ?
+    
     alt Professor indisponível (acima do limite)
-        DB-->>ProfessorCollection: limite excedido
-        ProfessorCollection-->>TCCController: indisponível
-        TCCController-->>IndicacaoProfessorForm: exibirErro("Professor já possui número máximo de orientandos")
-        IndicacaoProfessorForm-->>Aluno: erro exibido
+        DocDB-->>DB: limite excedido
+        DB-->>TCCModulo: indisponível
+        TCCModulo-->>Modulos: erro("Professor excedeu limite")
+        Modulos-->>AlunoService: erro
+        AlunoService-->>WebApp: exibirErro("Professor já possui número máximo de orientandos")
+        WebApp-->>Aluno: erro exibido
     else Professor disponível
-        DB-->>ProfessorCollection: dentro do limite
-        ProfessorCollection-->>TCCController: disponível
+        DocDB-->>DB: dentro do limite
+        DB-->>TCCModulo: disponível
 
-        %% 3. Vínculo com o TCC
-        TCCController->>TCC: vincularProfessor(idAluno, professorId)
-        TCC->>DB: UPDATE tcc SET professor_id = ? WHERE aluno_id = ?
-        DB-->>TCC: OK
-        TCC-->>TCCController: vínculo realizado
-        TCCController-->>IndicacaoProfessorForm: notificarSucesso("Professor vinculado com sucesso")
-        IndicacaoProfessorForm-->>Aluno: confirmação exibida
+        %% 4. Vínculo com TCC
+        TCCModulo->>DB: atualizarTCC(idAluno, professorId)
+        DB->>DocDB: UPDATE tcc SET professor_id = ? WHERE aluno_id = ?
+        DocDB-->>DB: OK
+        DB-->>TCCModulo: vínculo realizado
+
+        %% 5. Confirmação
+        TCCModulo-->>Modulos: sucesso
+        Modulos-->>AlunoService: professor vinculado
+        AlunoService-->>WebApp: exibirSucesso("Professor vinculado com sucesso")
+        WebApp-->>Aluno: confirmação exibida
     end
