@@ -1,0 +1,28 @@
+# Caso de Uso: UC.11 - Registrar Estágio
+
+## Descrição
+Permite ao aluno cadastrar um novo estágio no sistema, com base nas opções definidas pelos perfis administrativos. Após o cadastro, o aluno deve enviar a documentação obrigatória por meio do caso de uso **UC.16 – Enviar Documentação**.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- O ator precisa estar logado no sistema.  
+- Opções de cadastro definidas por um perfil administrativo.
+
+---
+
+## Fluxo Principal
+1. Acessar a seção **Estágios**.  
+2. Clicar em **Novo Estágio**.  
+3. Preencher formulário definido pelo perfil administrativo, incluindo:  
+   - Carga horária  
+   - Período de realização  
+   - Curso relacionado  
+   - Empresa  
+   - Nome do supervisor  
+   - Anexar termo de compromisso ou documento exig
