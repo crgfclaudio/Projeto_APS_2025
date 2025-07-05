@@ -1,20 +1,18 @@
-### UC.10 - Ver Lista de Monitorias Ofertadas
+### UC.10 - Ver Lista de Monitorias Ofertadas com arquitetura
 ```mermaid
 sequenceDiagram
     actor Aluno
-    participant MonitoriaListagem as MonitoriaListagem (Boundary)
-    participant MonitoriaConsultaController as MonitoriaConsultaController (Control)
-    participant MonitoriaCollection as MonitoriaCollection (EntityCollection)
-    participant DB as PostgreSQL
 
-    %% 1. Requisição da listagem
-    Aluno->>MonitoriaListagem: acessarLista(filtros)
-    MonitoriaListagem->>MonitoriaConsultaController: listarMonitorias(filtros)
+    participant WebApp as WebApp (Apresentação)
+    participant AlunoService as AlunoService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Monitoria as Módulo Monitoria
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
-    %% 2. Consulta no repositório
-    MonitoriaConsultaController->>MonitoriaCollection: buscarDisponiveis(filtros)
-    MonitoriaCollection->>DB: SELECT * FROM monitorias WHERE status = 'aberta' AND filtros...
-    DB-->>MonitoriaCollection: lista de monitorias
-    MonitoriaCollection-->>MonitoriaConsultaController: monitoriasEncontradas
-    MonitoriaConsultaController-->>MonitoriaListagem: exibirLista(monitorias)
-    MonitoriaListagem-->>Aluno: mostrarMonitoriasDisponiveis()
+    %% 1. Início da requisição via frontend
+    Aluno->>WebApp: acessarListaMonitorias(filtros)
+    WebApp->>AlunoService: requisitarMonitorias(filtros)
+
+    %% 2. Encaminhamento via módulo
+    AlunoService->>Modulos: encaminharParaMonitoria(fi
