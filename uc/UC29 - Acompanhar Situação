@@ -1,0 +1,29 @@
+# Caso de Uso: UC.29 - Acompanhar Situação
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo professor para visualizar em detalhes a situação de um acompanhamento específico, como um estágio, TCC ou monitoria em andamento, acessando todas as informações e atualizações relevantes.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+- O usuário deve estar vinculado ao acompanhamento específico.
+
+---
+
+## Fluxo Principal
+1. O ator acessa a lista de acompanhamentos (ver UC.28).
+2. O ator seleciona um acompanhamento específico.
+3. O sistema exibe os detalhes completos do acompanhamento, incluindo:
+   - Nome e dados do aluno
+   - Tipo de acompanhamento (estágio, TCC ou monitoria)
+   - Data de início e término previsto
+   - Plano de trabalho
+   - Entregas realizadas (ex.: relatórios, reuniões, registros de frequência)
+   - Status atual (em andamento, finalizado, interrompido)
+4. O ator pode v
