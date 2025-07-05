@@ -1,0 +1,61 @@
+# Caso de Uso: UC.17 - Alterar Dados
+
+## Descrição
+Este caso de uso descreve as ações realizadas por um usuário autenticado no sistema para alterar seus dados pessoais, tais como foto de perfil, nome, telefone e endereço.
+
+---
+
+## Ator Principal
+- Usuário Logado
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Perfil**.  
+2. O sistema exibe as informações atuais do usuário (foto, nome, telefone, endereço).  
+3. O ator seleciona o campo que deseja alterar (foto, nome, telefone ou endereço).  
+4. O ator fornece os novos dados desejados.  
+5. O ator confirma a alteração clicando em **Salvar**.  
+6. O sistema valida os dados fornecidos.  
+7. O sistema atualiza os dados do usuário no banco de dados.  
+8. O sistema confirma ao ator que os dados foram atualizados com sucesso.  
+9. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Cancelar alteração
+1. O ator desiste da alteração antes de salvar.  
+2. O sistema descarta as modificações e mantém os dados originais.  
+3. O fluxo retorna ao uso normal do sistema.
+
+---
+
+## Exceções
+1. Se os novos dados fornecidos forem inválidos (ex.: telefone em formato incorreto, imagem fora do limite de tamanho), o sistema notifica o ator com uma mensagem de erro e solicita nova tentativa.
+
+---
+
+## Pós-condições
+- Os dados pessoais do usuário foram atualizados no sistema.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF003
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
