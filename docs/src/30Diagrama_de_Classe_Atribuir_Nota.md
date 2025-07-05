@@ -1,62 +1,43 @@
 ### UC.30 - Atribuir Nota
 
 ```mermaid
-%% Diagrama de Classe para UC.30 – Atribuir Nota
+%% Diagrama de Classe para UC.30 - Atribuir Nota
 classDiagram
     class PainelProfessor {
         <<boundary>>
-        + selecionarAcompanhamento(idAcompanhamento)
-        + visualizarRelatorios()
-        + selecionarRelatorio(idRelatorio)
-        + enviarAvaliacao(nota, comentario)
+        +acessarAcompanhamento()
+        +visualizarRelatorios()
+        +avaliarRelatorio()
     }
 
     class AvaliacaoController {
         <<control>>
-        + fetchRelatorios(idAcompanhamento)
-        + fetchRelatorio(idRelatorio)
-        + registrarAvaliacao(idRelatorio, nota, comentario)
-        + notificarAluno(idRelatorio)
+        +validarEntrada()
+        +registrarAvaliacao()
     }
 
     class Relatorio {
         <<entity>>
-        + id: String
-        + tipo: String
-        + dataEnvio: Date
-        + arquivo: File
-        + status: String
-    }
-
-    class RelatorioCollection {
-        <<entity collection>>
-        + listarPorAcompanhamento(idAcompanhamento)
-        + buscarPorId(idRelatorio)
+        +conteudo: String
+        +dataEnvio: Date
+        +avaliacao: Avaliacao
     }
 
     class Avaliacao {
         <<entity>>
-        + idRelatorio: String
-        + nota: Float
-        + comentarios: String
-        + data: Date
+        +nota: Float
+        +comentario: String
+        +dataAvaliacao: Date
     }
 
-    class AvaliacaoCollection {
-        <<entity collection>>
-        + adicionar(avaliacao)
+    class NotificacaoService {
+        <<service>>
+        +notificarAluno()
     }
 
-    PainelProfessor --> AvaliacaoController : selecionarRelatorio(idRelatorio)
-    PainelProfessor --> AvaliacaoController : enviarAvaliacao(nota, comentario)
-    AvaliacaoController --> RelatorioCollection : listarPorAcompanhamento(idAcompanhamento)
-    RelatorioCollection --> Relatorio : retornaLista()
-    AvaliacaoController --> Relatorio : fetchRelatorio(idRelatorio)
-    AvaliacaoController --> AvaliacaoCollection : adicionar(avaliacao)
-    AvaliacaoController --> PainelProfessor : mostrarConfirmacao()
-
-        +atualizarStatus()
-    }
+    PainelProfessor --> AvaliacaoController : envia dados de avaliação
+    AvaliacaoController --> Relatorio : atualiza avaliação
+    AvaliacaoController --> NotificacaoService : notifica aluno
 
     PainelProfessor --> LiberacaoTCCController : solicita liberação
     LiberacaoTCCController --> TCCCollection : atualiza status
