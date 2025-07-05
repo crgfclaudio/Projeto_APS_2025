@@ -5,46 +5,46 @@
 classDiagram
     class PainelProfessor {
         <<boundary>>
-        +selecionarAcompanhamento(idAcompanhamento)
-        +visualizarRelatorios()
-        +selecionarRelatorio(idRelatorio)
-        +enviarAvaliacao(nota, comentario)
+        + selecionarAcompanhamento(idAcompanhamento)
+        + visualizarRelatorios()
+        + selecionarRelatorio(idRelatorio)
+        + enviarAvaliacao(nota, comentario)
     }
 
     class AvaliacaoController {
         <<control>>
-        +fetchRelatorios(idAcompanhamento)
-        +fetchRelatorio(idRelatorio)
-        +registrarAvaliacao(idRelatorio, nota, comentario)
-        +notificarAluno(idRelatorio)
+        + fetchRelatorios(idAcompanhamento)
+        + fetchRelatorio(idRelatorio)
+        + registrarAvaliacao(idRelatorio, nota, comentario)
+        + notificarAluno(idRelatorio)
     }
 
     class Relatorio {
         <<entity>>
-        +id: String
-        +tipo: String
-        +dataEnvio: Date
-        +arquivo: File
-        +status: String
+        + id: String
+        + tipo: String
+        + dataEnvio: Date
+        + arquivo: File
+        + status: String
     }
 
     class RelatorioCollection {
         <<entity collection>>
-        +listarPorAcompanhamento(idAcompanhamento)
-        +buscarPorId(idRelatorio)
+        + listarPorAcompanhamento(idAcompanhamento)
+        + buscarPorId(idRelatorio)
     }
 
     class Avaliacao {
         <<entity>>
-        +idRelatorio: String
-        +nota: Float
-        +comentarios: String
-        +data: Date
+        + idRelatorio: String
+        + nota: Float
+        + comentarios: String
+        + data: Date
     }
 
     class AvaliacaoCollection {
         <<entity collection>>
-        +adicionar(avaliacao)
+        + adicionar(avaliacao)
     }
 
     PainelProfessor --> AvaliacaoController : selecionarRelatorio(idRelatorio)
