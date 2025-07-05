@@ -56,6 +56,7 @@ sequenceDiagram
         end
     end
 
+
             MonitoriaRepository-->>MonitoriaService: sucesso
             MonitoriaService-->>MonitoriaController: sucesso
             MonitoriaController-->>PainelProfessor: exibirSucesso("Monitoria aberta com sucesso")
