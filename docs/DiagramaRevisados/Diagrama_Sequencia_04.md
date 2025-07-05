@@ -2,34 +2,23 @@
 ```mermaid
 sequenceDiagram
     actor Aluno
-    participant EnvioRelatorioForm as EnvioRelatorioForm (Boundary)
-    participant SubmissaoController as SubmissaoController (Control)
-    participant RelatorioCollection as RelatorioCollection (EntityCollection)
-    participant DB as PostgreSQL
 
-    %% 1. Submissão pelo formulário
-    Aluno->>EnvioRelatorioForm: anexarArquivo(PDF)
-    EnvioRelatorioForm->>SubmissaoController: POST /relatorioParcial (dados, arquivo)
+    participant WebApp as WebApp (Apresentação)
+    participant AlunoService as AlunoService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Relatorio as Módulo Relatório
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
-    %% 2. Criação e validação
-    SubmissaoController->>RelatorioCollection: verificarDuplicidade(idAluno, tipo="parcial")
-    RelatorioCollection->>DB: SELECT * FROM relatorios WHERE aluno_id = ? AND tipo = 'parcial'
+    %% 1. Submissão da interface
+    Aluno->>WebApp: enviarRelatorioParcial(PDF, metadata)
+    WebApp->>AlunoService: POST /relatorio/parcial (dados, arquivo)
 
-    alt Já existe relatório parcial
-        DB-->>RelatorioCollection: duplicado
-        RelatorioCollection-->>SubmissaoController: duplicado
-        SubmissaoController-->>EnvioRelatorioForm: erro("Relatório parcial já submetido")
-        EnvioRelatorioForm-->>Aluno: mostrar erro
-    else Submissão permitida
-        DB-->>RelatorioCollection: nenhum encontrado
-        RelatorioCollection-->>SubmissaoController: não duplicado
+    %% 2. Encaminhamento interno
+    AlunoService->>Modulos: direcionarParaModulo("relatorioParcial")
+    Modulos->>Relatorio: processarSubmissaoParcial(idAluno, arquivo)
 
-        %% 3. Registro no banco
-        SubmissaoController->>RelatorioCollection: adicionarRelatorioParcial(dados, arquivo)
-        RelatorioCollection->>DB: INSERT INTO relatorios (...)
-        DB-->>RelatorioCollection: OK
-        RelatorioCollection-->>SubmissaoController: confirmação
-        SubmissaoController-->>EnvioRelatorioForm: sucesso("Relatório parcial submetido")
-        EnvioRelatorioForm-->>Aluno: mostrar confirmação
-    end
+    %% 3. Verificação de duplicidade
+    Relatorio->>DB: verificarDuplicidade(idAluno, tipo="parcial")
+    DB->>DocDB: SELECT * FROM re*
 
