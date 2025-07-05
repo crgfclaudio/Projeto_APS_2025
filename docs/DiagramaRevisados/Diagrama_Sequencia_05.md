@@ -1,4 +1,4 @@
-### UC.5 - Submeter Relatório Final com arquitetura
+### UC.5 - Submeter Relatório Final com Arquitetura
 ```mermaid
 sequenceDiagram
     actor Aluno
