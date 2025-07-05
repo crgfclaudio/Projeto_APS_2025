@@ -4,7 +4,6 @@ graph TB
   %% Camada de Apresentação
   subgraph Apresentação
     WebUI[Web App]
-    MobileUI[Mobile App]
   end
 
   %% Camada de Negócio (Microserviços)
@@ -25,7 +24,6 @@ graph TB
 
   %% Fluxos principais
   WebUI -->|HTTPS| APIGateway
-  MobileUI -->|HTTPS| APIGateway
 
   APIGateway --> AuthService
   APIGateway --> ProductService
