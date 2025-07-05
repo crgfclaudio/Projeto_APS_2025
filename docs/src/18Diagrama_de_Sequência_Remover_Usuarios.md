@@ -1,6 +1,5 @@
 ### UC.18 – Remover Usuário (Administrador)
 ```mermaid
-
 sequenceDiagram
     actor Administrador
 
