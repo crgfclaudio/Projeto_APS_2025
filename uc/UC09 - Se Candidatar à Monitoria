@@ -1,0 +1,66 @@
+# Caso de Uso: UC.9 - Se Candidatar à Monitoria
+
+## Descrição
+Permite ao aluno se candidatar a uma monitoria com chamada aberta pelo professor da matéria.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- Chamada de monitoria disponível  
+- Aluno logado
+
+---
+
+## Fluxo Principal
+1. Acessar seção **Monitorias Ofertadas**.  
+2. Selecionar vaga desejada.  
+3. Clicar em **Candidatar-se**.  
+4. Preencher dados e anexar documentos obrigatórios.  
+5. Confirmar envio.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Já possui candidatura ativa para a disciplina
+1. O sistema verifica se há candidatura ativa do aluno para a disciplina escolhida.  
+2. Caso exista, o sistema impede nova submissão.  
+3. Exibe mensagem:  
+   *"Você já possui uma candidatura ativa para essa vaga."*
+
+### FA.2 – Vaga já preenchida ou chamada encerrada
+1. O aluno tenta se candidatar a uma vaga que já foi preenchida ou encerrada.  
+2. O sistema exibe mensagem:  
+   *"Esta chamada está encerrada ou não possui mais vagas disponíveis."*
+
+---
+
+## Exceções
+- Dados informados em falta.  
+- Erro no upload da solicitação.
+
+---
+
+## Pós-condições
+- Candidatura enviada para análise do professor.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF016  
+- RN005.1
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
