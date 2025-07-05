@@ -8,43 +8,54 @@ Arquitetura do Sistema
 # 📐 Projeto Arquitetural — Sistema ConectaAE
 
 ## 1. Visão Geral
-O **ConectaAE** é uma plataforma web voltada para a gestão de atividades acadêmicas extracurriculares da UPE, integrando funcionalidades relacionadas a **TCC**, **Estágio** e **Monitoria**. O sistema possui diferentes perfis de usuários (Aluno, Professor, Monitor, Administrador), cada um com permissões específicas.
+O **ConectaAE** é uma plataforma web voltada à gestão de atividades extracurriculares da Universidade de Pernambuco (UPE), integrando módulos como TCC, Estágio, Monitoria e Relatórios, com suporte a diferentes perfis de usuários: **Aluno**, **Professor**, **Monitor** e **Administrador**. Cada perfil possui permissões específicas dentro do sistema.
+
+
 
 ---
 
 ## 2. Padrão Arquitetural Adotado
-- **Arquitetura em Camadas (Three-Tier Architecture)** com **Padrão MVC (Model-View-Controller)**.
-- Organização em:
-  - Interface (Frontend)
-  - Lógica de Negócio (Backend)
-  - Persistência de Dados (Banco de Dados)
+- **Arquitetura baseada em Microserviços**
+
+Dividida em 3 camadas principais:
+
+Camada de Apresentação
+
+Camada de Negócio
+
+Camada de Dados
+
+Comunicação via **API Gateway** e **RabbitMQ** (mensageria)
+
+Organização interna dos serviços com o padrão **MVC**
 
 ---
 
 ## 3. Camadas da Arquitetura
 
 ### 🎨 A. Camada de Apresentação (Frontend)
-- **Tecnologia:** React.js com TailwindCSS
-- **Responsável por:**
-  - Renderizar a interface do usuário
-  - Capturar entradas (ex: formulários de relatório)
-  - Exibir respostas do backend
-  - Responsividade para desktop e mobile
-
+- **Tecnologia:** React.js + TailwindCSS
+- Acesso via navegador (WebApp)
+- Interfaces distintas para usuários **logados** e **não logados**
+- Comunicação com backend via **HTTPS**
 ### 🧠 B. Camada de Lógica de Negócio (Backend)
-- **Tecnologia:** Node.js com Express (ou Django)
-- **Responsável por:**
-  - Autenticação/autorização
-  - Regras de negócio (atribuir nota, aprovar estágio, etc.)
-  - Validação de dados
-  - Emissão de notificações
-  - Comunicação com o banco de dados
+Serviços desacoplados sob um **API Gateway**, cada um responsável por um domínio funcional:
+| Serviço	                      | Responsável por                                             |
+| ------------------------------|-------------------------------------------------------------|
+| Auth Service	                | Login, logout, controle de sessão                           |
+| User Service	                | CRUD de perfis: aluno, professor, monitor, administrador    | 
+| Aluno Service	                | Submissões, matrículas, certificados, interações nos módulos|
+| Professor Service	            | Avaliação de relatórios, emissão de notas e comentários     |
+| ADM Service	                  | Administração geral do sistema                              |
+| Gerenciador de Módulos	      | Coordenação de módulos TCC, Estágio, Monitoria e Relatório  |
 
 ### 💾 C. Camada de Dados (Persistência)
-- **Tecnologia:** PostgreSQL
-- **Responsável por:**
-  - Armazenar dados dos usuários, relatórios, documentos, avaliações
-  - Gerenciar transações e integridade
+Gerenciado por um **Database Service**, que interage com os repositórios:
+| Recurso	                      | Função                                                      |
+|-------------------------------|-------------------------------------------------------------|
+| User DB	                      | Armazenamento de dados de usuários                          |
+| Doc DB	                      | Armazenamento de documentos, relatórios e avaliações        |
+| RabbitMQ	                    | Canal assíncrono para notificações e integração com e-mails |
 
 ---
 
@@ -67,43 +78,60 @@ O **ConectaAE** é uma plataforma web voltada para a gestão de atividades acad�
 
 ```mermaid
 graph TB
-  %% Camada de Apresentação
-  subgraph Apresentação
-    WebUI[Web App]
-  end
 
-  %% Camada de Negócio (Microserviços)
-  subgraph Negócio
-    APIGateway[API Gateway]
-    AuthService[Auth Service]
-    ProductService[Product Service]
-    OrderService[Order Service]
-  end
+%% Camada de Apresentação
+subgraph Apresentação
+  WebApp[WebApp]
+  WebApp --> NaoLogado[Não Logado]
+  WebApp --> Logado[Logado]
+end
 
-  %% Camada de Persistência
-  subgraph Dados
-    UserDB[(User DB)]
-    ProductDB[(Product DB)]
-    OrderDB[(Order DB)]
-    MessageBroker[(RabbitMQ)]
-  end
+WebApp -->|HTTPS| APIGateway
 
-  %% Fluxos principais
-  WebUI -->|HTTPS| APIGateway
+%% Camada de Negócio
+subgraph "Negócio (Backend)"
+  APIGateway
 
-  APIGateway --> AuthService
-  APIGateway --> ProductService
-  APIGateway --> OrderService
+  AuthService[Auth Service]
+  UserService[User Service]
+  AlunoService[Aluno Service]
+  ProfessorService[Professor Service]
+  ADMService[ADM Service]
 
-  AuthService -->|CRUD| UserDB
-  ProductService -->|CRUD| ProductDB
-  OrderService -->|CRUD| OrderDB
+  ModuloManager[Gerenciador de Módulos]
+  ModuloManager --> ModTCC[Módulo TCC]
+  ModuloManager --> ModEstagio[Módulo Estágio]
+  ModuloManager --> ModMonitoria[Módulo Monitoria]
+  ModuloManager --> ModRelatorio[Módulo Relatório]
+end
 
-  %% Comunicação assíncrona (e-mail, notificações, etc.)
-  OrderService -->|pub/sub| MessageBroker
-  MessageBroker -->|notify| EmailWorker[Email Worker]
+APIGateway --> AuthService
+APIGateway --> UserService
+APIGateway --> AlunoService
+APIGateway --> ProfessorService
+APIGateway --> ADMService
 
-  %% Serviços Auxiliares
-  subgraph "Serviços Auxiliares"
-    EmailWorker
-  end
+AlunoService --> ModuloManager
+ProfessorService --> ModuloManager
+ADMService --> ModuloManager
+
+AuthService --> DatabaseService
+UserService --> DatabaseService
+ModuloManager --> DatabaseService
+
+%% Camada de Dados
+subgraph "Dados"
+  DatabaseService
+
+  DBUser[(User DB)]
+  DBDoc[(Doc DB)]
+  MQ[(RabbitMQ)]
+end
+
+DatabaseService -->|CRUD| DBUser
+DatabaseService -->|CRUD| DBDoc
+DatabaseService -->|pub/sub| MQ
+
+%% Serviços Externos
+MQ --> EmailSystem[Sistema de e-mail]
+
