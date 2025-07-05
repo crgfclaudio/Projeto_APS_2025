@@ -1,0 +1,34 @@
+# Caso de Uso: UC.20 - Cadastrar por Convite
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo administrador para cadastrar professores no sistema por meio de um convite enviado ao e-mail institucional. O processo permite que o próprio professor conclua seu cadastro ao acessar o link recebido.
+
+---
+
+## Ator Principal
+- Administrador
+
+---
+
+## Pré-condição
+- O administrador deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Gerenciar Usuários**.  
+2. O ator seleciona a opção **Cadastrar por Convite**.  
+3. O sistema exibe um formulário com os campos: nome do professor, e-mail institucional e departamento/curso.  
+4. O ator preenche os campos e clica em **Enviar Convite**.  
+5. O sistema valida os dados fornecidos (ex.: formato do e-mail, obrigatoriedade dos campos).  
+6. O sistema gera um link exclusivo para cadastro e o associa ao e-mail informado.  
+7. O sistema envia o convite por e-mail ao professor, com instruções para completar o cadastro.  
+8. O sistema exibe uma confirmação de envio ao administrador.  
+9. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Cancelar envio do convite
+1. O ator opta po
