@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
   participant Boundary as LoginUI (Boundary)
   participant Control as AuthController (Control)
