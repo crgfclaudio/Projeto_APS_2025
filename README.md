@@ -1,10 +1,10 @@
 # Projeto_APS_2025
 Projeto  a ser feito para a aula de Analise e Projeto de Software
 Arquitetura do Sistema
-Pasta
-UC->todos os casos de uso do sistema
-docs/src->todos os diagramas de classe e sequencia feitos antes da arquitetura do projeto
-docs/DiagramaRevisados->diagramas feitos pelo grupo revisados após a arquitetura 
+# Pasta
+- UC->todos os casos de uso do sistema
+- docs/src->todos os diagramas de classe e sequencia feitos antes da arquitetura do projeto
+- docs/DiagramaRevisados->diagramas feitos pelo grupo revisados após a arquitetura 
 # 📐 Projeto Arquitetural — Sistema ConectaAE
 
 ## 1. Visão Geral
