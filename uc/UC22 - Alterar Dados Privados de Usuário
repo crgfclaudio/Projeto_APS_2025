@@ -1,0 +1,24 @@
+# Caso de Uso: UC.22 - Alterar Dados Privados de Usuário
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo administrador para alterar dados privados e sensíveis de um usuário cadastrado no sistema, como CPF, e-mail institucional, matrícula e outros dados protegidos.
+
+---
+
+## Ator Principal
+- Administrador
+
+---
+
+## Pré-condição
+- O administrador deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Gerenciar Usuários**.  
+2. O ator localiza e seleciona o usuário desejado por meio de busca ou filtro.  
+3. O sistema exibe os dados cadastrais completos do usuário, incluindo dados privados.  
+4. O ator clica em **Editar Dados Privados**.  
+5. O ator altera os campos desejados (ex.: CPF, e-mail institucional, matrícula, curso vinculado, etc.).  
+6. O ator confirma a alt
