@@ -1,6 +1,7 @@
 ### UC.25 - Abrir Monitoria (Professor)
 
 ```mermaid
+
 sequenceDiagram
     actor Professor
 
@@ -53,12 +54,5 @@ sequenceDiagram
             Modulos-->>ProfessorService: monitoria aberta
             ProfessorService-->>WebApp: exibirSucesso("Monitoria aberta com sucesso")
             WebApp-->>Professor: feedback sucesso
-        end
-    end
-
-
-            MonitoriaRepository-->>MonitoriaService: sucesso
-            MonitoriaService-->>MonitoriaController: sucesso
-            MonitoriaController-->>PainelProfessor: exibirSucesso("Monitoria aberta com sucesso")
         end
     end
