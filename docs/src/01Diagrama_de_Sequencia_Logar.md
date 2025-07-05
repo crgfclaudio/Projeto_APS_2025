@@ -1,3 +1,4 @@
+### UC.1 - Logar
 ```mermaid
 sequenceDiagram
     actor Cliente
