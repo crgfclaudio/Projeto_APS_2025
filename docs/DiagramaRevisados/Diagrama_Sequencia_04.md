@@ -1,4 +1,4 @@
-### UC.4 - Submeter Relatório Parcial
+### UC.4 - Submeter Relatório Parcial com Arquitetura
 ```mermaid
 sequenceDiagram
     actor Aluno
