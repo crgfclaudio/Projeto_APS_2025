@@ -1,0 +1,39 @@
+# Caso de Uso: UC.15 - Ver Lista de Solicitações
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo coordenador para visualizar a lista de solicitações registradas no sistema, com o objetivo de acompanhar e gerenciar os pedidos realizados pelos alunos.
+
+---
+
+## Ator Principal
+- Coordenador
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Solicitações**.  
+2. O sistema exibe a lista de solicitações registradas, com informações relevantes sobre a solicitação.  
+3. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Aplicar filtros na lista
+1. O ator opta por aplicar algum filtro específico de exibição.  
+2. O sistema exibe a lista conforme os critérios selecionados.
+
+---
+
+## Exceções
+- N/A
+
+---
+
+## Pós-condições
+- A lista de solicitaçõe
