@@ -1,0 +1,69 @@
+# Caso de Uso: UC.26 - Ver Lista de Solicitações
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo professor para visualizar a lista de solicitações recebidas no sistema, incluindo candidaturas de monitoria, pedidos de orientação de TCC e pedidos de acompanhamento de estágio.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **“Solicitações Recebidas”**.
+2. O sistema exibe uma lista contendo todas as solicitações vinculadas ao professor:
+   - Candidaturas a monitoria
+   - Pedidos de orientação de TCC
+   - Pedidos de acompanhamento de estágio
+3. Cada solicitação na lista apresenta informações relevantes, como:
+   - Nome do aluno
+   - Tipo da solicitação
+   - Data de envio
+   - Status atual
+4. O ator pode clicar em qualquer solicitação para visualizar seus detalhes.
+5. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Filtrar solicitações
+1. O ator aplica filtros por tipo de solicitação, status (pendente, aprovada, recusada), aluno ou curso.
+2. O sistema atualiza a lista conforme os filtros.
+
+### FA.2 – Ordenar solicitações
+1. O ator ordena a lista por data, nome do aluno ou tipo de solicitação.
+2. O sistema apresenta a lista de acordo com o critério selecionado.
+
+---
+
+## Exceções
+- Se não houver solicitações, o sistema exibe a mensagem: **“Nenhuma solicitação recebida”**.
+- Se houver falha na recuperação dos dados, o sistema exibe mensagem de erro e orienta nova tentativa.
+
+---
+
+## Pós-condições
+- O professor tem acesso a todas as solicitações que aguardam sua análise e decisão.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF016  
+- RF019
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
