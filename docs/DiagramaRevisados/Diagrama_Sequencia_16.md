@@ -35,7 +35,3 @@ sequenceDiagram
         SolicitacaoCollection-->>SolicitacaoController: confirmação
         SolicitacaoController-->>PainelProfessor: mostrarConfirmacao("Solicitação rejeitada")
     end
-
-        SolicitacaoCollection-->>SolicitacaoController: confirmação
-        SolicitacaoController-->>PainelProfessor: mostrarConfirmacao("Solicitação rejeitada")
-    end
