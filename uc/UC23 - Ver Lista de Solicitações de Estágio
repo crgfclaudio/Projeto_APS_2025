@@ -1,0 +1,22 @@
+# Caso de Uso: UC.23 - Ver Lista de Solicitações de Estágio
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo coordenador para consultar a lista de solicitações de estágio enviadas pelos alunos, a fim de acompanhar o andamento, analisar os dados e tomar decisões posteriores.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator seleciona a opção **Solicitações de Estágio**.  
+2. O sistema exibe uma lista com todas as solicitações registradas, apresentando informações como nome do aluno, empresa, tipo de estágio, status e data de envio.  
+3. O ator pode clicar em uma solicitação para visualizar seus detalhes.  
+4. O caso de uso se encerra.
