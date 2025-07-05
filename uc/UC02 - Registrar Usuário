@@ -1,0 +1,68 @@
+# Caso de Uso: UC.2 - Registrar Usuário
+
+## Descrição
+Permite ao Administrador realizar o registro de novos usuários no sistema, individualmente ou por lote.
+
+---
+
+## Ator Principal
+- Administrador
+
+---
+
+## Pré-condição
+- Administrador autenticado
+
+---
+
+## Fluxo Principal
+1. Acessar painel de administração.  
+2. Escolher a opção **Cadastrar Usuário**.  
+3. Selecionar entre registro individual ou por planilha CSV.  
+4. Preencher/Importar dados (nome, CPF, e-mail institucional, curso, matrícula, etc).  
+5. Confirmar cadastro.  
+6. Sistema verifica unicidade de dados e registra usuário com senha provisória.  
+7. Notifica o usuário por e-mail com link de acesso.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Planilha com erros
+1. O sistema detecta falhas na planilha (formato inválido, dados ausentes ou duplicados).  
+2. O sistema exibe mensagem de erro listando os problemas.  
+3. Administrador corrige e re-envia a planilha.  
+4. Fluxo retorna ao passo 4 do Fluxo Principal.
+
+### FA.2 – Cadastro de professor via convite
+1. Administrador seleciona **Registrar Professor**.  
+2. Preenche e-mail institucional.  
+3. Sistema envia link com senha provisória.  
+4. Fluxo retorna ao passo 7 do Fluxo Principal.
+
+---
+
+## Exceções
+- Se os dados fornecidos forem inválidos ou incompletos, o sistema exibe mensagens de erro correspondentes e solicita correções.  
+- Se ocorrer falha no envio do e-mail, o sistema notifica o administrador.
+
+---
+
+## Pós-condições
+- Usuário cadastrado com sucesso e com acesso liberado.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RN002.1 a RN002.7  
+- RF001
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
