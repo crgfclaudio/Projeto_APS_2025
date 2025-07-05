@@ -1,0 +1,28 @@
+# Caso de Uso: UC.30 - Atribuir Nota
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo professor para avaliar um relatório submetido por um aluno em atividades que ele acompanha (como monitoria, TCC ou estágio), atribuindo uma nota e, opcionalmente, adicionando comentários ou observações sobre a entrega.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+- O usuário deve estar vinculado ao acompanhamento do aluno.
+- O aluno deve ter enviado um relatório válido no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu “Acompanhamentos” e seleciona o acompanhamento de um aluno (ver UC.28 e UC.29).
+2. O ator navega até a seção de “Relatórios” do acompanhamento.
+3. O sistema exibe a lista de relatórios enviados pelo aluno.
+4. O ator seleciona o relatório que deseja avaliar.
+5. O sistema exibe o conteúdo do relatório e o formulário de avaliação.
+6. O ator preenche os campos de avaliação:
+   - Nota (ex.: de 0 a 10)
+   - Comentário (opc
