@@ -1,0 +1,24 @@
+# Caso de Uso: UC.19 - Cadastrar Usuário
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo administrador para cadastrar manualmente um novo usuário no sistema, definindo suas informações pessoais, credenciais de acesso e perfil de permissão (ex.: aluno, professor, coordenador).
+
+---
+
+## Ator Principal
+- Administrador
+
+---
+
+## Pré-condição
+- O administrador deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Gerenciar Usuários**.  
+2. O ator seleciona a opção **Cadastrar Novo Usuário**.  
+3. O sistema exibe um formulário de cadastro.  
+4. O ator preenche os campos obrigatórios (ex.: nome, e-mail, CPF, telefone, tipo de usuário, curso ou setor, senha inicial).  
+5. O ator clica em **Salvar**.  
+6. O sistema v
