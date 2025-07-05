@@ -1,0 +1,59 @@
+# Caso de Uso: UC.10 - Ver Lista de Monitorias Ofertadas
+
+## Descrição
+Permite ao aluno consultar todas as chamadas de monitoria disponíveis.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- O ator precisa estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. Acessar a seção **Monitoria**.  
+2. Sistema carrega e exibe as monitorias abertas.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Sem chamadas abertas
+1. O sistema conclui que não há chamadas de monitoria disponíveis.  
+2. Exibe a mensagem:  
+   *"Nenhuma chamada de monitoria disponível no momento. Verifique novamente mais tarde."*
+
+### FA.2 – Filtro sem resultados
+1. O aluno aplica filtros de busca que não retornam resultados.  
+2. O sistema exibe:  
+   *"Nenhuma monitoria encontrada com os critérios selecionados."*
+
+---
+
+## Exceções
+- Falha ao carregar a lista.
+
+---
+
+## Pós-condições
+- Lista apresentada ao aluno.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF016
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
