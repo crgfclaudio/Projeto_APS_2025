@@ -1,0 +1,56 @@
+# Caso de Uso: UC.5 - Submeter Relatório Final
+
+## Descrição
+Permite ao aluno enviar o relatório final (não pode ser alterado após entregue) de uma atividade vinculada.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- Atividade em fase definida  
+- Aluno logado
+
+---
+
+## Fluxo Principal
+1. Acessar seção **Minhas Atividades**.  
+2. Escolher a atividade a ser concluída.  
+3. Clicar em **Enviar Relatório Final**.  
+4. Anexar documento PDF.  
+5. Confirmar envio.
+
+---
+
+## Fluxos Alternativos (FA)
+- N/A
+
+---
+
+## Exceções
+- Falha no upload.  
+- Formato inválido.
+
+---
+
+## Pós-condições
+- Relatório final enviado para avaliação.
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF014  
+- RN004.3
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
