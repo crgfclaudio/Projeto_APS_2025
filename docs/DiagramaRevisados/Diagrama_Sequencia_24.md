@@ -3,46 +3,70 @@
 ````mermaid
 sequenceDiagram
     actor Professor
-    participant PainelProfessor as PainelProfessor (Boundary)
-    participant AprovarEstagioController as AprovarEstagioController (Control)
-    participant SolicitacaoEstagioCollection as SolicitacaoEstagioCollection (EntityCollection)
-    participant SolicitacaoEstagio as SolicitacaoEstagio (Entity)
-    participant DB as PostgreSQL
+
+    participant WebApp as WebApp (Apresentação)
+    participant ProfessorService as ProfessorService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Estagio as Módulo Estágio
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
     %% Fluxo de visualização da solicitação
-    Professor->>PainelProfessor: visualizarSolicitacao(id)
-    PainelProfessor->>AprovarEstagioController: visualizarSolicitacao(id)
-    AprovarEstagioController->>SolicitacaoEstagioCollection: buscarPorId(id)
-    SolicitacaoEstagioCollection->>DB: SELECT * FROM solicitacoes WHERE id = ?
-    DB-->>SolicitacaoEstagioCollection: dados da solicitação
-    SolicitacaoEstagioCollection-->>AprovarEstagioController: solicitacao
-    AprovarEstagioController-->>PainelProfessor: exibirDetalhes(solicitacao)
+    Professor->>WebApp: visualizarSolicitacao(id)
+    WebApp->>ProfessorService: GET /solicitacoes/{id}
+    ProfessorService->>Modulos: buscarSolicitacao(id)
+    Modulos->>Estagio: obterDetalhesSolicitacao(id)
+    Estagio->>DB: consultarSolicitacao(id)
+    DB->>DocDB: SELECT * FROM solicitacoes WHERE id = ?
+    DocDB-->>DB: dados da solicitação
+    DB-->>Estagio: dados recebidos
+    Estagio-->>Modulos: detalhes da solicitação
+    Modulos-->>ProfessorService: retorno com dados
+    ProfessorService-->>WebApp: exibirDetalhes(solicitacao)
+    WebApp-->>Professor: exibir detalhes
 
-    %% Fluxo principal - Aprovação
-    alt Professor aprova
-        Professor->>PainelProfessor: aceitarSolicitacao(id)
-        PainelProfessor->>AprovarEstagioController: aceitarSolicitacao(id)
-        AprovarEstagioController->>AprovarEstagioController: validarSolicitacao(solicitacao)
+    %% Fluxo principal – Decisão do professor
+    alt Aprovar
+        Professor->>WebApp: aceitarSolicitacao(id)
+        WebApp->>ProfessorService: POST /solicitacoes/{id}/aprovar
+        ProfessorService->>Modulos: aprovarSolicitacao(id)
+        Modulos->>Estagio: validarSolicitacao(id)
+
         alt Solicitação válida
-            AprovarEstagioController->>SolicitacaoEstagioCollection: modificarStatus(id, "Aprovada")
-            SolicitacaoEstagioCollection->>DB: UPDATE solicitacoes SET status='Aprovada' WHERE id = ?
-            DB-->>SolicitacaoEstagioCollection: OK
-            SolicitacaoEstagioCollection-->>AprovarEstagioController: confirmação
-            AprovarEstagioController-->>PainelProfessor: mostrarConfirmacao("Solicitação aprovada")
+            Estagio->>DB: atualizarStatus(id, "Aprovada")
+            DB->>DocDB: UPDATE solicitacoes SET status = 'Aprovada' WHERE id = ?
+            DocDB-->>DB: OK
+            DB-->>Estagio: sucesso
+            Estagio-->>Modulos: confirmação
+            Modulos-->>ProfessorService: sucesso
+            ProfessorService-->>WebApp: mostrarConfirmacao("Solicitação aprovada")
+            WebApp-->>Professor: exibir sucesso
         else Solicitação inválida
-            AprovarEstagioController-->>PainelProfessor: mostrarErro("Solicitação inválida")
+            Estagio-->>Modulos: erro("Solicitação inválida")
+            Modulos-->>ProfessorService: erro
+            ProfessorService-->>WebApp: mostrarErro("Solicitação inválida")
+            WebApp-->>Professor: exibir erro
         end
-    else Professor rejeita
-        Professor->>PainelProfessor: rejeitarSolicitacao(id)
-        PainelProfessor->>AprovarEstagioController: rejeitarSolicitacao(id)
-        AprovarEstagioController->>AprovarEstagioController: validarSolicitacao(solicitacao)
+    else Rejeitar
+        Professor->>WebApp: rejeitarSolicitacao(id)
+        WebApp->>ProfessorService: POST /solicitacoes/{id}/rejeitar
+        ProfessorService->>Modulos: rejeitarSolicitacao(id)
+        Modulos->>Estagio: validarSolicitacao(id)
+
         alt Solicitação válida
-            AprovarEstagioController->>SolicitacaoEstagioCollection: modificarStatus(id, "Rejeitada")
-            SolicitacaoEstagioCollection->>DB: UPDATE solicitacoes SET status='Rejeitada' WHERE id = ?
-            DB-->>SolicitacaoEstagioCollection: OK
-            SolicitacaoEstagioCollection-->>AprovarEstagioController: confirmação
-            AprovarEstagioController-->>PainelProfessor: mostrarConfirmacao("Solicitação rejeitada")
+            Estagio->>DB: atualizarStatus(id, "Rejeitada")
+            DB->>DocDB: UPDATE solicitacoes SET status = 'Rejeitada' WHERE id = ?
+            DocDB-->>DB: OK
+            DB-->>Estagio: sucesso
+            Estagio-->>Modulos: confirmação
+            Modulos-->>ProfessorService: sucesso
+            ProfessorService-->>WebApp: mostrarConfirmacao("Solicitação rejeitada")
+            WebApp-->>Professor: exibir sucesso
         else Solicitação inválida
-            AprovarEstagioController-->>PainelProfessor: mostrarErro("Solicitação inválida")
+            Estagio-->>Modulos: erro("Solicitação inválida")
+            Modulos-->>ProfessorService: erro
+            ProfessorService-->>WebApp: mostrarErro("Solicitação inválida")
+            WebApp-->>Professor: exibir erro
         end
     end
+
