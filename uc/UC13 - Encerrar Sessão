@@ -1,0 +1,31 @@
+# Caso de Uso: UC.13 - Encerrar Sessão
+
+## Descrição
+Este caso de uso descreve as ações necessárias para que um usuário autenticado encerre sua sessão no sistema.
+
+---
+
+## Ator Principal
+- Usuário Logado
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O usuário acessa a opção **Encerrar Sessão** no sistema.  
+2. Aparece uma mensagem perguntando se o usuário quer realmente sair.  
+3. O usuário confirma que deseja encerrar a sessão.  
+4. O sistema finaliza a sessão do usuário.  
+5. O sistema redireciona o usuário para a tela de login.  
+6. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 - Cancelar Encerramento
+1. O usuário opta p
