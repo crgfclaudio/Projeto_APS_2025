@@ -1,0 +1,52 @@
+# Caso de Uso: UC.21 - Cadastrar por Lote
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo administrador para cadastrar múltiplos alunos no sistema simultaneamente, a partir da importação de um arquivo em formato compatível (ex.: CSV).
+
+---
+
+## Ator Principal
+- Administrador
+
+---
+
+## Pré-condição
+- O Administrador deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **Gerenciar Usuários**.  
+2. O ator seleciona a opção **Cadastrar por Lote**.  
+3. O sistema exibe uma janela para envio de arquivos e um tipo de arquivo esperado (ex.: CSV).  
+4. O ator seleciona e envia o arquivo contendo os dados dos alunos (ex.: nome, e-mail institucional, CPF, matrícula, curso, telefone).  
+5. O sistema realiza a validação do arquivo (formato, campos obrigatórios, dados duplicados).  
+6. O sistema apresenta um resumo dos dados que serão cadastrados, com aviso sobre eventuais registros inválidos.  
+7. O ator confirma a importação.  
+8. O sistema cadastra os usuários válidos e exibe uma mensagem confirmando a adição.  
+9. O sistema envia os dados de acesso para os alunos cadastrados via e-mail institucional.  
+10. O caso de uso se encerra.
+
+---
+
+## Fluxos Alternativos (FA)
+
+### FA.1 – Cancelar envio do convite
+1. O ator opta por cancelar antes de confirmar o envio.  
+2. O sistema fecha a janela aberta e retorna à tela anterior.
+
+### FA.2 – Cadastrar parcialmente
+1. O ator opta por cadastrar somente os registros válidos, ignorando os inválidos.  
+2. O sistema realiza o cadastro parcial e exibe o relatório de sucesso/falha.
+
+---
+
+## Exceções
+- Se o arquivo enviado estiver em formato incorreto ou com estrutura inválida, o sistema exibe uma mensagem de erro e impede o cadastro.  
+- Se o arquivo contiver usuários já cadastrados (ex.: mesmo e-mail ou CPF), o sistema notifica o ator e ignora os registros duplicados.  
+- Se ocorrer falha técnica durante o processamento, o sistema interrompe o processo, exibe mensagem de erro e orienta nova tentativa.
+
+---
+
+## Pós-condições
+- Os alunos válidos foram cadastrados no sistema com base nas informações do arquivo.  
