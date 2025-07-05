@@ -1,38 +1,52 @@
-### UC.11 - Registrar Estágio
+### UC.11 - Registrar Estágio com Arquitetura
 ```mermaid
 sequenceDiagram
     actor Aluno
-    participant EstagioForm as EstagioForm (Boundary)
-    participant EstagioController as EstagioController (Control)
-    participant EstagioCollection as EstagioCollection (EntityCollection)
-    participant Estagio as Estagio (Entity)
-    participant DB as PostgreSQL
 
-    %% 1. Entrada dos dados pelo formulário
-    Aluno->>EstagioForm: preencherFormulario(dados)
-    EstagioForm->>EstagioForm: anexarDocumento(file)
-    EstagioForm->>EstagioController: registrarSolicitacao(dados, file)
+    participant WebApp as WebApp (Apresentação)
+    participant AlunoService as AlunoService (Controller)
+    participant Modulos as Gerenciador de Módulos
+    participant Estagio as Módulo Estágio
+    participant DB as DatabaseService
+    participant DocDB as Doc DB
 
-    %% 2. Validação dos dados de entrada
-    EstagioController->>EstagioController: validarDados(dados, file)
+    %% 1. Entrada de dados via frontend
+    Aluno->>WebApp: preencherFormularioEstagio(dados, arquivo)
+    WebApp->>AlunoService: POST /estagio/registrar (dados, file)
+
+    %% 2. Encaminhamento ao módulo de estágio
+    AlunoService->>Modulos: registrarEstagio(idAluno, dados, file)
+    Modulos->>Estagio: processarRegistroEstagio(idAluno, dados, file)
+
+    %% 3. Validação de dados de entrada
+    Estagio->>Estagio: validarDados(dados, file)
     alt Dados inválidos
-        EstagioController-->>EstagioForm: mostrarErro("Dados inválidos")
+        Estagio-->>Modulos: erro("Dados inválidos")
+        Modulos-->>AlunoService: erro de validação
+        AlunoService-->>WebApp: exibirErro("Dados inválidos")
+        WebApp-->>Aluno: mostrarErro
     else Dados válidos
-        %% 3. Instancia o objeto Estágio
-        EstagioController->>Estagio: criarInstancia(dados)
 
-        %% 4. Verifica regras de negócio (como período, carga horária, etc.)
-        EstagioController->>EstagioCollection: validarRegras(estagio)
-        EstagioCollection-->>EstagioController: resultado das regras
-
+        %% 4. Regras de negócio (período, carga horária, etc.)
+        Estagio->>Estagio: validarRegrasNegocio()
         alt Regras não atendidas
-            EstagioController-->>EstagioForm: mostrarErro("Regras não atendidas")
+            Estagio-->>Modulos: erro("Regras não atendidas")
+            Modulos-->>AlunoService: erro de regras
+            AlunoService-->>WebApp: exibirErro("Regras não atendidas")
+            WebApp-->>Aluno: mostrarErro
         else Regras válidas
-            %% 5. Persistência no banco de dados
-            EstagioController->>EstagioCollection: adicionar(estagio)
-            EstagioCollection->>DB: INSERT INTO estagios (...)
-            DB-->>EstagioCollection: confirmação
-            EstagioCollection-->>EstagioController: estágio salvo
-            EstagioController-->>EstagioForm: mostrarSucesso("Estágio registrado com sucesso")
+
+            %% 5. Persistência no banco
+            Estagio->>DB: salvarEstagio(dados, arquivo)
+            DB->>DocDB: INSERT INTO estagios (...)
+            DocDB-->>DB: OK
+            DB-->>Estagio: confirmação
+
+            %% 6. Resposta de sucesso
+            Estagio-->>Modulos: sucesso
+            Modulos-->>AlunoService: estágio salvo
+            AlunoService-->>WebApp: exibirSucesso("Estágio registrado com sucesso")
+            WebApp-->>Aluno: mostrarConfirmação
         end
     end
+
