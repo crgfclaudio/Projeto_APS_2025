@@ -50,8 +50,3 @@ sequenceDiagram
         WebApp-->>Administrador: exibirConfirmação
     end
 
-        UsuarioCollection->>DB: DELETE FROM usuarios WHERE id = ?
-        DB-->>UsuarioCollection: OK
-        UsuarioCollection-->>UsuarioAdminController: confirmacaoRemocao
-        UsuarioAdminController-->>PainelAdministrador: mostrarConfirmacao("Usuário removido com sucesso")
-    end
