@@ -1,0 +1,52 @@
+# Caso de Uso: UC.6 - Ver Lista de Atividades Vinculadas
+
+## Descrição
+Permite ao aluno visualizar todas as suas atividades em andamento ou concluídas.
+
+---
+
+## Ator Principal
+- Aluno
+
+---
+
+## Pré-condição
+- É necessário estar logado
+
+---
+
+## Fluxo Principal
+1. Acessar painel do aluno.  
+2. Clicar em **Minhas Atividades**.  
+3. Sistema exibe lista com status de andamento.
+
+---
+
+## Fluxos Alternativos (FA)
+- N/A
+
+---
+
+## Exceções
+- Sistema indisponível  
+- Sem atividades cadastradas
+
+---
+
+## Pós-condições
+- Lista apresentada ao aluno
+
+---
+
+## Pontos de Extensão
+- N/A
+
+---
+
+## Referências
+- RF015
+
+---
+
+## Observações
+Consultar as regras de negócio e as mensagens exibidas pelo sistema durante a interação com o ator.
