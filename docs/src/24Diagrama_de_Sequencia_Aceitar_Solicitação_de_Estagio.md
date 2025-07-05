@@ -31,4 +31,10 @@ sequenceDiagram
         PainelProfessor->>AprovarEstagioController: rejeitarSolicitacao(idSolicitacao)
         AprovarEstagioController->>AprovarEstagioController: validarSolicitacao(solicitacao)
         alt válida
-            Aprov
+            AprovarEstagioController->>SolicitacaoEstagioCollection: modificarStatus(idSolicitacao, "Rejeitada")
+            SolicitacaoEstagioCollection-->>AprovarEstagioController: confirmacao
+            AprovarEstagioController-->>PainelProfessor: mostrarConfirmacao("Solicitação de estágio rejeitada")
+        else inválida
+            AprovarEstagioController-->>PainelProfessor: mostrarErro("Solicitação inválida")
+        end
+    end
