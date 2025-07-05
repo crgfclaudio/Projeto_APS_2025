@@ -1,5 +1,5 @@
 ### UC.9 - Se Candidatar à Monitoria
-``mermaid
+```mermaid
 sequenceDiagram
     actor Aluno
     participant CandidaturaForm as CandidaturaForm (Boundary)
