@@ -35,11 +35,11 @@ graph TB
   ProductService -->|CRUD| ProductDB
   OrderService -->|CRUD| OrderDB
 
-  ;; Comunicação assíncrona (e-mail, notificações, etc.)
+  %% Comunicação assíncrona (e-mail, notificações, etc.)
   OrderService -->|pub/sub| MessageBroker
-  MessageBroker -->|notify| EmailWorker[(Email Worker)]
+  MessageBroker -->|notify| EmailWorker[Email Worker]
 
-  %% Componente de envio de e-mail
-  subgraph “Serviços Auxiliares”
+  %% Serviços Auxiliares
+  subgraph "Serviços Auxiliares"
     EmailWorker
   end
