@@ -1,0 +1,23 @@
+# Caso de Uso: UC.25 - Abrir Monitoria
+
+## Descrição
+Este caso de uso descreve as ações realizadas pelo professor para abrir uma nova vaga de monitoria no sistema, disponibilizando informações como disciplina, número de vagas, critérios de seleção e período de candidatura, permitindo que alunos se candidatem posteriormente.
+
+---
+
+## Ator Principal
+- Professor
+
+---
+
+## Pré-condição
+- O usuário deve estar logado no sistema.
+
+---
+
+## Fluxo Principal
+1. O ator acessa o menu **“Monitoria”**.  
+2. O ator seleciona a opção **“Abrir Nova Monitoria”**.  
+3. O sistema exibe um formulário com os seguintes campos:  
+   - Disciplina vinculada  
+   - Número de vagas  
