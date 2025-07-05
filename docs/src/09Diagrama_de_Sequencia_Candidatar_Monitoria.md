@@ -26,3 +26,4 @@ sequenceDiagram
             MonitoriaController-->>CandidaturaForm: mostrarSuccess("Candidatura enviada")
         end
     end
+
